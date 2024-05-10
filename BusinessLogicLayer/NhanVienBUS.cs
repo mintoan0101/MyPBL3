@@ -48,5 +48,9 @@ namespace BusinessLogicLayer
         {
             return dao.GetLastID();
         }
+        public string GetID(string txt)
+        {
+            return dao.GetID(txt);
+        }
     }
 }

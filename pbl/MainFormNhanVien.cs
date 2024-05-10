@@ -89,7 +89,9 @@ namespace pbl
 
         private void button2_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Hoadon_nhanvien());
+            Hoadon_nhanvien f = new Hoadon_nhanvien();
+            f.IDNhanvien = btn_infor.Text;
+            OpenChildForm(f);
             button2.BackColor = panel3.BackColor;
             button1.BackColor = panel2.BackColor;
             button3.BackColor = panel2.BackColor;

@@ -44,10 +44,10 @@ namespace DataAccessLayer
             string query = "INSERT INTO HOADON (IDHoaDon, IDNhanVien, NgayTaoHoaDon, IDKhachHang, ChietKhau, TongTien) " +
                            "VALUES ('" + hd.IDHoaDon + "', '" + hd.IDNhanVien + "', '" + hd.NgayTaoHoaDon.ToString("yyyy-MM-dd") + "', '" +
                            hd.IDKhachHang + "', '" + hd.ChietKhau + "', '" + hd.TongTien + "')";
-            foreach (ChiTietHoaDon chitiethoadon in hd.listChiTietHoaDon)
-            {
-                ChiTietHoaDonDAO.Instance.Insert(chitiethoadon, hd.IDHoaDon);
-            }
+            //foreach (ChiTietHoaDon chitiethoadon in hd.listChiTietHoaDon)
+            //{
+            //    ChiTietHoaDonDAO.Instance.Insert(chitiethoadon, hd.IDHoaDon);
+            //}
 
             return db.ExcuteData(query);
         }

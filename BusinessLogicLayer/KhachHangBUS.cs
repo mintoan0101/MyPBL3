@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,6 +28,20 @@ namespace BusinessLogicLayer
         private KhachHangBUS()
         {
 
+        }
+
+        public KhachHang GetKhachHang(string sdt)
+        {
+            KhachHang kh = new KhachHang();
+            DataTable dt = KhachHangDAO.Instance.GetDataBySDT(sdt);
+            if (dt.Rows.Count > 0)
+            {
+                kh.ID = dt.Rows[0]["ID"].ToString();
+                kh.Ten = dt.Rows[0]["Ten"].ToString();
+                kh.SDT = sdt;
+                kh.Diem = Convert.ToInt32(dt.Rows[0]["Diem"]);
+            }
+            return kh;
         }
         public DataTable GetData()
         {
@@ -65,6 +80,26 @@ namespace BusinessLogicLayer
                 kh.Diem = 0;
             }
         }
+
+        public KhachHang GetKhachHangBySDT(string SDT)
+        {
+            DataTable dataTable = KhachHangDAO.Instance.GetDataBySDT(SDT);
+            if (dataTable.Rows.Count > 0)
+            {
+                DataRow row = dataTable.Rows[0];
+                KhachHang kh = new KhachHang
+                {
+                    SDT = row["SDT"].ToString(),
+                    Ten = row["Ten"].ToString(),
+                    ID = row["ID"].ToString(),
+                    Diem = Convert.ToInt32(row["Diem"])
+                };
+
+                return kh;
+            }
+            return null;
+        }
+
 
     }
 }

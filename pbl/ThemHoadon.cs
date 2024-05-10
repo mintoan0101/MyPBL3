@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,19 +9,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ValueObject;
 
 namespace pbl
 {
     public partial class ThemHoadon : Form
     {
+        public string IDNhanVien;
         private ChiTietSanPhamBUS ctspBUS = new ChiTietSanPhamBUS();
         private SanPhamBUS spBUS = new SanPhamBUS();
+        private NhanVienBUS nvBUS = new NhanVienBUS();
         public ThemHoadon()
         {
             InitializeComponent();
             Load_DS_San_Pham();
-            Load_CBB_Sap_Xep();
             SetBill();
+            AddColumnsToDataGridView2();
+            panel10.Visible = false;
+            panel11.Visible = false;
         }
         private void SetBill()
         {
@@ -45,7 +51,7 @@ namespace pbl
             if (PhanLoai != null && txt != null)
             {
                 dataGridView1.DataSource = ctspBUS.Search(PhanLoai, txt);
-            }   
+            }
         }
 
         private void label9_Click(object sender, EventArgs e)
@@ -66,21 +72,170 @@ namespace pbl
                            "JOIN SANPHAM sanpham ON chitietsanpham.IDSanPham = sanpham.IDSanPham";
             dataGridView1.DataSource = ctspBUS.GetData2(query);
         }
-        public void Load_CBB_Sap_Xep()
+
+        private void AddColumnsToDataGridView2()
         {
-            List<string> ColunmName = GetColumnNamesFromDataGridView (dataGridView1);
-            cbb_SapXep.Items.Add("Tất Cả");
-            foreach (string s in ColunmName)
-            {
-                cbb_SapXep.Items.Add(s);
-            }
-            cbb_SapXep.SelectedItem = "Tất Cả";
+            dataGridView2.Columns.Add("IDChiTiet", "IDChiTiet");
+            dataGridView2.Columns.Add("Ten", "Ten");
+            dataGridView2.Columns.Add("SoLuong", "SoLuong");
+            dataGridView2.Columns.Add("ThanhTien", "ThanhTien");
+            dataGridView2.ColumnHeadersVisible = true;
         }
-     
-        
+
         private void cbb_SapXep_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void bt_Huy_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bt_ThanhToan_Click(object sender, EventArgs e)
+        {
+            if (lb_Tong.Text != "0" && lb_IDKhachHang.Text != "ID: ")
+            {
+                HoaDon hd = new HoaDon();
+                hd.IDHoaDon = lb_ID.Text;
+                hd.IDNhanVien = nvBUS.GetID(IDNhanVien);
+                hd.IDKhachHang = lb_IDKhachHang.Text.Substring(4);
+                hd.NgayTaoHoaDon = Convert.ToDateTime(lb_DateTime.Text);
+                hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
+                hd.TongTien = Convert.ToDouble(lb_Tong.Text);
+                List<ChiTietHoaDon> listChiTietHoaDon = new List<ChiTietHoaDon>();
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon
+                        {
+                            IDChiTiet = row.Cells["IDChiTiet"].Value.ToString(),
+                            SoLuong = Convert.ToInt32(row.Cells["SoLuong"].Value)
+                        };
+                        listChiTietHoaDon.Add(chiTietHoaDon);
+                    }
+                        
+
+                    
+                }
+                hd.listChiTietHoaDon = listChiTietHoaDon;
+                HoaDonBUS.Instance.Insert(hd);
+                foreach (ChiTietHoaDon chitiethoadon in hd.listChiTietHoaDon)
+                {
+                    ChiTietHoaDonDAO.Instance.Insert(chitiethoadon, hd.IDHoaDon);
+                }
+                MessageBox.Show("Thanh toán thành công");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Hoá đơn không hợp lệ");
+            }   
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string sdt = txt_STDKhachHang.Text;
+            KhachHang kh = KhachHangBUS.Instance.GetKhachHangBySDT(sdt);
+            if (kh != null)
+            {
+                panel10.Visible = true;
+                panel11.Visible = true;
+                lb_IDKhachHang.Text = "ID: " + kh.ID;
+                lb_TenKhachHang.Text = "Tên: " + kh.Ten;
+                lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
+            }
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.CurrentCell != null)
+            {
+                DataGridViewRow currentRow = dataGridView1.CurrentCell.OwningRow;
+                DataGridViewRow newRow = new DataGridViewRow();
+                newRow.CreateCells(dataGridView2);
+                newRow.Cells[0].Value = currentRow.Cells[0].Value;
+                newRow.Cells[1].Value = currentRow.Cells[1].Value;
+                newRow.Cells[2].Value = 1; 
+                newRow.Cells[3].Value = currentRow.Cells[3].Value;
+                if (int.TryParse(currentRow.Cells["Số Lượng"].Value?.ToString(), out int soLuongCoSan))
+                {
+                    currentRow.Cells["Số Lượng"].Value = soLuongCoSan - 1;
+                }
+                dataGridView2.Rows.Add(newRow);
+                double thanhtien = 0.0;
+                foreach (DataGridViewRow item in dataGridView2.Rows)
+                {
+                    thanhtien += Convert.ToDouble(item.Cells[2].Value) * Convert.ToDouble(item.Cells[3].Value);
+
+                }
+                lb_ThanhTien.Text = thanhtien.ToString();
+                double chietkhau = 0.0;
+                lb_Tong.Text = (thanhtien - chietkhau).ToString();
+
+
+            }
+        }
+
+        private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView2.CurrentCell != null &&
+                dataGridView2.CurrentCell.OwningColumn.Name == "SoLuong")
+            {
+                DataGridViewRow currentRowInDataGridView2 = dataGridView2.CurrentCell.OwningRow;
+                if (double.TryParse(currentRowInDataGridView2.Cells["SoLuong"].Value?.ToString(), out double soLuongMoi))
+                {
+                    string idChiTiet = currentRowInDataGridView2.Cells["IDChiTiet"].Value?.ToString();
+                    DataGridViewRow currentRowInDataGridView1 = null;
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    { 
+                        if (row.Cells["ID Chi Tiết"].Value?.ToString() == idChiTiet)
+                        {
+                        currentRowInDataGridView1 = row;
+                            break;
+                        } 
+                    }
+
+                    if (currentRowInDataGridView1 != null)
+                    {
+                        if (double.TryParse(currentRowInDataGridView1.Cells["Số Lượng"].Value?.ToString(), out double soLuongCoSan))
+                        {
+                            if (soLuongMoi > soLuongCoSan)
+                            {
+                                MessageBox.Show("Số lượng trong kho không đủ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                currentRowInDataGridView2.Cells["SoLuong"].Value = soLuongCoSan;
+                            }
+                            else
+                            {
+                                double thanhtien = 0.0;
+                                foreach (DataGridViewRow item in dataGridView2.Rows)
+                                {
+                                    thanhtien += Convert.ToDouble(item.Cells[2].Value) * Convert.ToDouble(item.Cells[3].Value);
+
+                                }
+                                lb_ThanhTien.Text = thanhtien.ToString();
+                                double chietkhau = 0.0;
+                                lb_Tong.Text = (thanhtien - chietkhau).ToString();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void bt_DoiDiem_Click(object sender, EventArgs e)
+        {
+            KhachHang kh = new KhachHang();
+            kh = KhachHangBUS.Instance.GetKhachHangBySDT(txt_STDKhachHang.Text);
+            HoaDon hd = new HoaDon();
+            hd.IDHoaDon = lb_ID.Text;
+            hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
+            hd.TongTien = Convert.ToDouble(lb_Tong.Text);
+            KhachHangBUS.Instance.DoiDiem(hd, kh);
+            lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
+            lb_GiamGia.Text = hd.ChietKhau.ToString();
+        }
     }
 }
+

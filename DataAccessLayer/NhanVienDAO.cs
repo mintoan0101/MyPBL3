@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.Design;
 
 namespace DataAccessLayer
 {
@@ -71,6 +72,11 @@ namespace DataAccessLayer
         public string GetLastID()
         {
             return db.GetLastId("Select * from nhanvien");
+        }
+        public string GetID(string txt)
+        {
+            string s = "SELECT IDNhanVien FROM NHANVIEN JOIN TAIKHOAN ON NHANVIEN.IDTaiKhoan = TAIKHOAN.IDTaiKhoan WHERE TAIKHOAN.TenTaiKhoan = '" + txt + "'";
+            return db.GetStringDataCellByQueryCommand(s);
         }
     }
 }

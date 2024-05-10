@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ValueObject;
+using ZstdSharp.Unsafe;
 
 namespace DataAccessLayer
 {
@@ -51,5 +52,10 @@ namespace DataAccessLayer
             return db.ExcuteData("update khachhang set SDT ='"+kh.SDT+"',Ten ='"+kh.Ten+ "', Diem = " + kh.Diem + "' where ID = '"+kh.ID+"'");
         }
         
+        public DataTable GetDataBySDT(string SDT)
+        {
+            return db.GetData("select * from khachhang where SDT = '" + SDT + "'");
+        }
+
     }
 }
