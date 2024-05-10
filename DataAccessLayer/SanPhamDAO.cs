@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System.Data;
 using MySql.Data.MySqlClient;
-using pbl;
+using ValueObject;
 namespace DataAccessLayer
 {
     public class SanPhamDAO
@@ -38,7 +38,7 @@ namespace DataAccessLayer
         }
         public int Delete(string id)
         {
-            return db.ExcuteData("update sanpham set isDelete = true where IDSanPham = '"+id+"'");
+            return db.ExcuteData("Delete from SANPHAM where IDSanPham = '"+id+"'");
         }
         public int Update(SanPham sp)
         {

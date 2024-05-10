@@ -13,7 +13,6 @@ namespace pbl
 {
     public partial class Khachhang_Nhanvien : Form
     {
-        KhachHangBUS khachhangbus = new KhachHangBUS();
         //CÁC HÀM KHỞI TẠO CƠ BẢN
         public Khachhang_Nhanvien()
         {
@@ -44,7 +43,7 @@ namespace pbl
         //CÁC HÀM BỔ TRỢ
         public void Load_Khach_Hang()
         {
-            dataGridView1.DataSource = khachhangbus.GetData();
+            dataGridView1.DataSource = KhachHangBUS.Instance.GetData();
         }
         public void Load_Thuoc_Tinh()
         {

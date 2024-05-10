@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pbl
+namespace ValueObject
 {
     public class HoaDon
     {
-        private string IDHoaDon {  get; set; }
-        private string IDNhanVien { get; set; }
-        private DateTime NgayTaoHoaDon { get; set; }
-        private string SDTKhachHang {  get; set; }
-        private double TongTien {  get; set; }
-        private List<ChiTietHoaDon> listChiTietHoaDon { get; set; }
+        public string IDHoaDon {  get; set; }
+        public string IDNhanVien { get; set; }
+        public DateTime NgayTaoHoaDon { get; set; }
+        public string IDKhachHang {  get; set; }
+        public double ChietKhau { get; set; }
+        public double TongTien {  get; set; }
+        public List<ChiTietHoaDon> listChiTietHoaDon { get; set; }
     }
 }

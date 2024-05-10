@@ -60,7 +60,6 @@ namespace pbl
                 f.IDSanPham = idsanpham;
                 f.TenNPP = row.Cells[1].Value.ToString();
                 f.HSD = row.Cells[2].Value.ToString();
-                f.isDel = (row.Cells[3].Value.ToString()=="0")?false:true;
                 f.ShowDialog();
             }
             else
@@ -87,7 +86,7 @@ namespace pbl
         {
             string npp = cb_nhaphanphoi.SelectedItem.ToString();
             string boloc = cb_boloc.SelectedItem.ToString();
-            string sql = "select IDChiTiet,TenNhaPhanPhoi,HanSuDung,isDelete from chitietsanpham join nhaphanphoi on chitietsanpham.IDNhaPhanPhoi = nhaphanphoi.IDNhaPhanPhoi where IDSanPham = '" + idsanpham + "' ";
+            string sql = "select IDChiTiet,TenNhaPhanPhoi,HanSuDung from chitietsanpham join nhaphanphoi on chitietsanpham.IDNhaPhanPhoi = nhaphanphoi.IDNhaPhanPhoi where IDSanPham = '" + idsanpham + "' ";
             if(npp == "Tất Cả")
             {
                 if(boloc == "Tất Cả")
@@ -119,17 +118,9 @@ namespace pbl
             {
                 condition += " HanSuDung <= CURDATE()";
             }
-            else if (boloc == "Đã Xóa")
-            {
-                condition += " isDelete = true";
-            }
             else if (boloc == "Chưa Hết Hạn")
             {
                 condition += " HanSuDung > CURDATE()";
-            }
-            else if (boloc == "Chưa Xóa")
-            {
-                condition += " isDelete = false";
             }
             return condition;
         }

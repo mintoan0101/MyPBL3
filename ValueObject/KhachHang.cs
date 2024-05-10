@@ -11,5 +11,6 @@ namespace ValueObject
         public string ID {  get; set; }
         public string SDT { get; set; }
         public string Ten { get; set; }
+        public int Diem {  get; set; }
     }
 }
