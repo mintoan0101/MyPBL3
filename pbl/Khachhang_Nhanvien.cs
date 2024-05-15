@@ -26,13 +26,13 @@ namespace pbl
         //CÁC HÀM XỬ LÍ SỰ KIỆN
         private void button3_Click(object sender, EventArgs e)
         {
-            ThemKhachHang f = new ThemKhachHang();
+            ThemKhachHang f = new ThemKhachHang(null);
             f.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ThemKhachHang f = new ThemKhachHang();
+            ThemKhachHang f = new ThemKhachHang(null);
             f.ShowDialog();
         }
 

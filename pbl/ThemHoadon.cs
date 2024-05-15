@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DataAccessLayer;
+using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,8 @@ namespace pbl
     public partial class ThemHoadon : Form
     {
         public string IDNhanVien;
+        private KhachHang kh = new KhachHang(); 
+
         private ChiTietSanPhamBUS ctspBUS = new ChiTietSanPhamBUS();
         private SanPhamBUS spBUS = new SanPhamBUS();
         private NhanVienBUS nvBUS = new NhanVienBUS();
@@ -80,6 +83,7 @@ namespace pbl
             dataGridView2.Columns.Add("SoLuong", "SoLuong");
             dataGridView2.Columns.Add("ThanhTien", "ThanhTien");
             dataGridView2.ColumnHeadersVisible = true;
+            dataGridView2.Columns["IDChiTiet"].Visible = false;
         }
 
         private void cbb_SapXep_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,7 +98,7 @@ namespace pbl
 
         private void bt_ThanhToan_Click(object sender, EventArgs e)
         {
-            if (lb_Tong.Text != "0" && lb_IDKhachHang.Text != "ID: ")
+            if (lb_Tong.Text != "0" && lb_IDKhachHang.Text != "ID:")
             {
                 HoaDon hd = new HoaDon();
                 hd.IDHoaDon = lb_ID.Text;
@@ -125,6 +129,9 @@ namespace pbl
                 {
                     ChiTietHoaDonDAO.Instance.Insert(chitiethoadon, hd.IDHoaDon);
                 }
+  //            int diem = Convert.ToInt32(lb_Tong.Text) / 20000;
+ //             kh.Diem += diem;
+                KhachHangBUS.Instance.Update(kh.ID, kh);
                 MessageBox.Show("Thanh toán thành công");
                 this.Close();
             }
@@ -137,7 +144,7 @@ namespace pbl
         private void button2_Click(object sender, EventArgs e)
         {
             string sdt = txt_STDKhachHang.Text;
-            KhachHang kh = KhachHangBUS.Instance.GetKhachHangBySDT(sdt);
+            kh = KhachHangBUS.Instance.GetKhachHangBySDT(sdt);
             if (kh != null)
             {
                 panel10.Visible = true;
@@ -146,6 +153,12 @@ namespace pbl
                 lb_TenKhachHang.Text = "Tên: " + kh.Ten;
                 lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
             }
+            else
+            {
+                ThemKhachHang f = new ThemKhachHang(null);
+                f.ShowDialog();
+            }
+                
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -226,15 +239,15 @@ namespace pbl
 
         private void bt_DoiDiem_Click(object sender, EventArgs e)
         {
-            KhachHang kh = new KhachHang();
-            kh = KhachHangBUS.Instance.GetKhachHangBySDT(txt_STDKhachHang.Text);
             HoaDon hd = new HoaDon();
             hd.IDHoaDon = lb_ID.Text;
             hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
             hd.TongTien = Convert.ToDouble(lb_Tong.Text);
             KhachHangBUS.Instance.DoiDiem(hd, kh);
+            MessageBox.Show(kh.Diem.ToString());
             lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
             lb_GiamGia.Text = hd.ChietKhau.ToString();
+            lb_Tong.Text = hd.TongTien.ToString();
         }
     }
 }

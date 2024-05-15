@@ -65,7 +65,7 @@ namespace BusinessLogicLayer
 
         public void DoiDiem(HoaDon hd, KhachHang kh)
         {
-            int diemChietKhau = kh.Diem * 1000;
+            int diemChietKhau = kh.Diem;
             if (diemChietKhau >= hd.TongTien / 2)
             {
                 int diemCanDung = Convert.ToInt32(hd.TongTien / 2000);
@@ -80,6 +80,7 @@ namespace BusinessLogicLayer
                 kh.Diem = 0;
             }
         }
+
 
         public KhachHang GetKhachHangBySDT(string SDT)
         {
@@ -100,6 +101,24 @@ namespace BusinessLogicLayer
             return null;
         }
 
+        public string SetID()
+        {
+            string LastId_KH = HoaDonBUS.Instance.GetLastID();
+            int l_KH = LastId_KH.Length;
 
+            int num_KH = int.Parse(LastId_KH.Substring(l_KH - 2)) + 1;
+            return ("KH" + Num_ID(num_KH));
+        }
+
+        public string Num_ID(int num)
+        {
+            if (num <= 9)
+            {
+                return "0" + num;
+            }
+            return num + "";
+        }
     }
+
 }
+
