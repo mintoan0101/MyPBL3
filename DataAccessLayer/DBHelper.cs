@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 
 
-namespace DAL
+namespace DataAccessLayer
 {
     internal class DBHelper
     {

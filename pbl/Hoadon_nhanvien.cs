@@ -12,6 +12,7 @@ namespace pbl
 {
     public partial class Hoadon_nhanvien : Form
     {
+        public string IDNhanvien;
         private Form currentFormChild;
         public Hoadon_nhanvien()
         {
@@ -35,6 +36,7 @@ namespace pbl
         private void button1_Click(object sender, EventArgs e)
         {
             ThemHoadon f = new ThemHoadon();
+            f.IDNhanVien = IDNhanvien;
             f.ShowDialog();
         }
 

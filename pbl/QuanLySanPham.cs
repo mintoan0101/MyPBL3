@@ -107,7 +107,7 @@ namespace pbl
         //CÁC HÀM BỔ TRỢ
         public void Load_DS_San_Pham()
         {
-            dataGridView1.DataSource = sanphambus.GetData("select IDSanPham,Ten,PhanLoai,GiaBan from sanpham where isDelete = false");
+            dataGridView1.DataSource = sanphambus.GetData("select IDSanPham,Ten,PhanLoai,GiaBan from sanpham");
         }
         public void Load_Phan_Loai()
         {
@@ -161,7 +161,7 @@ namespace pbl
         }
         public void Tim_Kiem()
         {
-            string sql = "select IDSanPham,Ten,PhanLoai,GiaBan from sanpham where isDelete = false";
+            string sql = "select IDSanPham,Ten,PhanLoai,GiaBan from sanpham ";
             string ten_tim_kiem = txt_tentimkiem.Text;
             string ten_bo_loc = cb_boloc.SelectedItem.ToString();
             string ten_danh_muc = cb_phanloai.SelectedItem.ToString();

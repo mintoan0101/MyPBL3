@@ -1,5 +1,5 @@
 ﻿using DataAccessLayer;
-using pbl;
+using ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,6 +47,10 @@ namespace BusinessLogicLayer
         public string GetLastID()
         {
             return dao.GetLastID();
+        }
+        public string GetID(string txt)
+        {
+            return dao.GetID(txt);
         }
     }
 }

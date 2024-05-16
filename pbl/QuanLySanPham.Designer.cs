@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.cb_boloc = new System.Windows.Forms.ComboBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.txt_tentimkiem = new System.Windows.Forms.TextBox();
-            this.cb_phanloai = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_chitiet = new System.Windows.Forms.Button();
             this.btn_them = new System.Windows.Forms.Button();
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_sua = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cb_boloc = new System.Windows.Forms.ComboBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.btn_timkiem = new System.Windows.Forms.Button();
+            this.txt_tentimkiem = new System.Windows.Forms.TextBox();
+            this.cb_phanloai = new System.Windows.Forms.ComboBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -61,79 +61,12 @@
             this.panel1.Size = new System.Drawing.Size(744, 428);
             this.panel1.TabIndex = 1;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.panel2.Controls.Add(this.cb_boloc);
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(20, 20);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(704, 49);
-            this.panel2.TabIndex = 3;
-            // 
-            // cb_boloc
-            // 
-            this.cb_boloc.DisplayMember = "Sort By";
-            this.cb_boloc.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_boloc.FormattingEnabled = true;
-            this.cb_boloc.Location = new System.Drawing.Point(544, 11);
-            this.cb_boloc.Margin = new System.Windows.Forms.Padding(4);
-            this.cb_boloc.Name = "cb_boloc";
-            this.cb_boloc.Size = new System.Drawing.Size(140, 28);
-            this.cb_boloc.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.btn_timkiem);
-            this.panel3.Controls.Add(this.txt_tentimkiem);
-            this.panel3.Controls.Add(this.cb_phanloai);
-            this.panel3.Location = new System.Drawing.Point(17, 11);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(502, 29);
-            this.panel3.TabIndex = 0;
-            // 
-            // txt_tentimkiem
-            // 
-            this.txt_tentimkiem.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_tentimkiem.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_tentimkiem.Location = new System.Drawing.Point(157, 5);
-            this.txt_tentimkiem.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_tentimkiem.Name = "txt_tentimkiem";
-            this.txt_tentimkiem.Size = new System.Drawing.Size(259, 20);
-            this.txt_tentimkiem.TabIndex = 1;
-            // 
-            // cb_phanloai
-            // 
-            this.cb_phanloai.DisplayMember = "Phân loại";
-            this.cb_phanloai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_phanloai.Font = new System.Drawing.Font("Segoe UI Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_phanloai.FormattingEnabled = true;
-            this.cb_phanloai.Location = new System.Drawing.Point(0, 1);
-            this.cb_phanloai.Margin = new System.Windows.Forms.Padding(4);
-            this.cb_phanloai.Name = "cb_phanloai";
-            this.cb_phanloai.Size = new System.Drawing.Size(147, 27);
-            this.cb_phanloai.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 90);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(704, 257);
-            this.dataGridView1.TabIndex = 0;
-            // 
             // btn_chitiet
             // 
             this.btn_chitiet.BackColor = System.Drawing.Color.White;
             this.btn_chitiet.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btn_chitiet.FlatAppearance.BorderSize = 3;
-            this.btn_chitiet.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_chitiet.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_chitiet.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.btn_chitiet.Image = global::pbl.Properties.Resources.edit;
             this.btn_chitiet.Location = new System.Drawing.Point(555, 366);
@@ -200,6 +133,41 @@
             this.btn_sua.UseVisualStyleBackColor = false;
             this.btn_sua.Click += new System.EventHandler(this.btn_sua_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.panel2.Controls.Add(this.cb_boloc);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Location = new System.Drawing.Point(20, 20);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(704, 49);
+            this.panel2.TabIndex = 3;
+            // 
+            // cb_boloc
+            // 
+            this.cb_boloc.DisplayMember = "Sort By";
+            this.cb_boloc.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_boloc.FormattingEnabled = true;
+            this.cb_boloc.Location = new System.Drawing.Point(544, 11);
+            this.cb_boloc.Margin = new System.Windows.Forms.Padding(4);
+            this.cb_boloc.Name = "cb_boloc";
+            this.cb_boloc.Size = new System.Drawing.Size(140, 28);
+            this.cb_boloc.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btn_timkiem);
+            this.panel3.Controls.Add(this.txt_tentimkiem);
+            this.panel3.Controls.Add(this.cb_phanloai);
+            this.panel3.Location = new System.Drawing.Point(17, 11);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(502, 29);
+            this.panel3.TabIndex = 0;
+            // 
             // btn_timkiem
             // 
             this.btn_timkiem.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -213,6 +181,38 @@
             this.btn_timkiem.TabIndex = 2;
             this.btn_timkiem.UseVisualStyleBackColor = false;
             this.btn_timkiem.Click += new System.EventHandler(this.btn_timkiem_Click);
+            // 
+            // txt_tentimkiem
+            // 
+            this.txt_tentimkiem.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_tentimkiem.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_tentimkiem.Location = new System.Drawing.Point(157, 5);
+            this.txt_tentimkiem.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_tentimkiem.Name = "txt_tentimkiem";
+            this.txt_tentimkiem.Size = new System.Drawing.Size(259, 20);
+            this.txt_tentimkiem.TabIndex = 1;
+            // 
+            // cb_phanloai
+            // 
+            this.cb_phanloai.DisplayMember = "Phân loại";
+            this.cb_phanloai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_phanloai.Font = new System.Drawing.Font("Segoe UI Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_phanloai.FormattingEnabled = true;
+            this.cb_phanloai.Location = new System.Drawing.Point(0, 1);
+            this.cb_phanloai.Margin = new System.Windows.Forms.Padding(4);
+            this.cb_phanloai.Name = "cb_phanloai";
+            this.cb_phanloai.Size = new System.Drawing.Size(147, 27);
+            this.cb_phanloai.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(20, 90);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.Size = new System.Drawing.Size(704, 257);
+            this.dataGridView1.TabIndex = 0;
             // 
             // QuanLySanPham
             // 
