@@ -44,6 +44,11 @@ namespace BusinessLogicLayer
             return HoaDonDAO.Instance.Insert(hd);
         }
 
+        public DataTable Search(string searchText, string selectedColumn, double minTotal, double maxTotal)
+        {
+            return HoaDonDAO.Instance.Search(searchText, selectedColumn, minTotal, maxTotal);
+        }
+
         public string GetLastID()
         {
             return HoaDonDAO.Instance.GetLastID();

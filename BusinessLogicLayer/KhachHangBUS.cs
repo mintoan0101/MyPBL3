@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,7 @@ namespace BusinessLogicLayer
             return KhachHangDAO.Instance.Update(id, kh);
         }
 
+        
         public void DoiDiem(HoaDon hd, KhachHang kh)
         {
             int diemChietKhau = kh.Diem;
@@ -118,6 +120,10 @@ namespace BusinessLogicLayer
             }
             return num + "";
         }
+
+        
+
+
     }
 
 }

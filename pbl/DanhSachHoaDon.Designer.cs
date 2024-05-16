@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbb_BoLoc = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.bt_search = new System.Windows.Forms.Button();
+            this.txt_search = new System.Windows.Forms.TextBox();
+            this.cbb_PhanLoai = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -46,113 +45,102 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(744, 428);
             this.panel1.TabIndex = 2;
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
-            this.button2.FlatAppearance.BorderSize = 3;
-            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Image = global::pbl.Properties.Resources.quaylai2;
-            this.button2.Location = new System.Drawing.Point(555, 367);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(169, 47);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Quay lại";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.panel2.Controls.Add(this.comboBox2);
+            this.panel2.Controls.Add(this.cbb_BoLoc);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(20, 20);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(704, 49);
             this.panel2.TabIndex = 3;
             // 
-            // comboBox2
+            // cbb_BoLoc
             // 
-            this.comboBox2.DisplayMember = "Sort By";
-            this.comboBox2.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(544, 11);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(140, 28);
-            this.comboBox2.TabIndex = 1;
+            this.cbb_BoLoc.DisplayMember = "Sort By";
+            this.cbb_BoLoc.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbb_BoLoc.FormattingEnabled = true;
+            this.cbb_BoLoc.Location = new System.Drawing.Point(544, 11);
+            this.cbb_BoLoc.Margin = new System.Windows.Forms.Padding(4);
+            this.cbb_BoLoc.Name = "cbb_BoLoc";
+            this.cbb_BoLoc.Size = new System.Drawing.Size(140, 28);
+            this.cbb_BoLoc.TabIndex = 1;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.textBox1);
-            this.panel3.Controls.Add(this.comboBox1);
+            this.panel3.Controls.Add(this.bt_search);
+            this.panel3.Controls.Add(this.txt_search);
+            this.panel3.Controls.Add(this.cbb_PhanLoai);
             this.panel3.Location = new System.Drawing.Point(17, 11);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(502, 29);
             this.panel3.TabIndex = 0;
             // 
-            // button1
+            // bt_search
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::pbl.Properties.Resources.search44;
-            this.button1.Location = new System.Drawing.Point(423, -1);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 30);
-            this.button1.TabIndex = 2;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.bt_search.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.bt_search.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.bt_search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_search.Image = global::pbl.Properties.Resources.search44;
+            this.bt_search.Location = new System.Drawing.Point(423, -1);
+            this.bt_search.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_search.Name = "bt_search";
+            this.bt_search.Size = new System.Drawing.Size(79, 30);
+            this.bt_search.TabIndex = 2;
+            this.bt_search.UseVisualStyleBackColor = false;
+            this.bt_search.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // txt_search
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(157, 5);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(259, 20);
-            this.textBox1.TabIndex = 1;
+            this.txt_search.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_search.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_search.Location = new System.Drawing.Point(157, 5);
+            this.txt_search.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_search.Name = "txt_search";
+            this.txt_search.Size = new System.Drawing.Size(259, 20);
+            this.txt_search.TabIndex = 1;
             // 
-            // comboBox1
+            // cbb_PhanLoai
             // 
-            this.comboBox1.DisplayMember = "Phân loại";
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(0, 1);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(147, 27);
-            this.comboBox1.TabIndex = 0;
+            this.cbb_PhanLoai.DisplayMember = "Phân loại";
+            this.cbb_PhanLoai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbb_PhanLoai.Font = new System.Drawing.Font("Segoe UI Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbb_PhanLoai.FormattingEnabled = true;
+            this.cbb_PhanLoai.Items.AddRange(new object[] {
+            "ID Hoá Đơn",
+            "Nhân Viên",
+            "Ngày Tạo Hoá Đơn",
+            "Khách Hàng"});
+            this.cbb_PhanLoai.Location = new System.Drawing.Point(0, 1);
+            this.cbb_PhanLoai.Margin = new System.Windows.Forms.Padding(4);
+            this.cbb_PhanLoai.Name = "cbb_PhanLoai";
+            this.cbb_PhanLoai.Size = new System.Drawing.Size(147, 27);
+            this.cbb_PhanLoai.TabIndex = 0;
+            this.cbb_PhanLoai.Text = "       Phân loại";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(20, 90);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(704, 270);
+            this.dataGridView1.Size = new System.Drawing.Size(704, 313);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            this.dataGridView1.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseDoubleClick);
             // 
             // DanhSachHoaDon
             // 
@@ -162,7 +150,7 @@
             this.ClientSize = new System.Drawing.Size(744, 428);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DanhSachHoaDon";
             this.Text = "DanhSachHoaDon";
             this.panel1.ResumeLayout(false);
@@ -178,12 +166,11 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbb_BoLoc;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button bt_search;
+        private System.Windows.Forms.TextBox txt_search;
+        private System.Windows.Forms.ComboBox cbb_PhanLoai;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
     }
 }

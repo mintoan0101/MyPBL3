@@ -39,11 +39,11 @@ namespace DataAccessLayer
         }
         public DataTable GetData(string ID)
         {
-            string query = "SELECT sanpham.Ten AS TenSanPham, chitiethoadon.SoLuong " +
+            string query = "SELECT sanpham.Ten AS 'Sản Phẩm', chitiethoadon.SoLuong AS 'Số Lượng', sanpham.GiaBan AS 'Đơn Giá' " +
                            "FROM CHITIETHOADON chitiethoadon " +
                            "JOIN CHITIETSANPHAM chitietsanpham ON chitiethoadon.IDChiTiet = chitietsanpham.IDChiTiet " +
                            "JOIN SANPHAM sanpham ON chitietsanpham.IDSanPham = sanpham.IDSanPham"
-                           + "WHERE CHITIETHOADON.IDHoaDon = '" + ID + "';";
+                           + " WHERE CHITIETHOADON.IDHoaDon = '" + ID + "'";
 
             return db.GetData(query);
         }

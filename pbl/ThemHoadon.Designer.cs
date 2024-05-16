@@ -31,6 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.bt_TimKiem = new System.Windows.Forms.Button();
             this.txt_TimKiem = new System.Windows.Forms.TextBox();
             this.cbb_PhanLoai = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -50,20 +51,19 @@
             this.lb_DateTime = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.bt_DoiDiem = new System.Windows.Forms.Button();
+            this.lb_DiemThuong = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.lb_TenKhachHang = new System.Windows.Forms.Label();
+            this.lb_IDKhachHang = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.txt_STDKhachHang = new System.Windows.Forms.TextBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.lb_IDKhachHang = new System.Windows.Forms.Label();
-            this.lb_TenKhachHang = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.lb_DiemThuong = new System.Windows.Forms.Label();
-            this.bt_DoiDiem = new System.Windows.Forms.Button();
             this.bt_Huy = new System.Windows.Forms.Button();
             this.bt_ThanhToan = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.bt_TimKiem = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -71,8 +71,8 @@
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel8.SuspendLayout();
-            this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -109,6 +109,20 @@
             this.panel3.Size = new System.Drawing.Size(605, 29);
             this.panel3.TabIndex = 0;
             // 
+            // bt_TimKiem
+            // 
+            this.bt_TimKiem.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.bt_TimKiem.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.bt_TimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_TimKiem.Image = global::pbl.Properties.Resources.search44;
+            this.bt_TimKiem.Location = new System.Drawing.Point(507, -2);
+            this.bt_TimKiem.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_TimKiem.Name = "bt_TimKiem";
+            this.bt_TimKiem.Size = new System.Drawing.Size(97, 30);
+            this.bt_TimKiem.TabIndex = 2;
+            this.bt_TimKiem.UseVisualStyleBackColor = false;
+            this.bt_TimKiem.Click += new System.EventHandler(this.bt_Search_Click);
+            // 
             // txt_TimKiem
             // 
             this.txt_TimKiem.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -136,6 +150,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(20, 90);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
@@ -284,6 +299,7 @@
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.GridColor = System.Drawing.Color.White;
             this.dataGridView2.Location = new System.Drawing.Point(24, 143);
@@ -345,6 +361,92 @@
             this.panel8.Size = new System.Drawing.Size(541, 126);
             this.panel8.TabIndex = 4;
             // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.bt_DoiDiem);
+            this.panel11.Controls.Add(this.lb_DiemThuong);
+            this.panel11.Location = new System.Drawing.Point(352, 27);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(176, 88);
+            this.panel11.TabIndex = 11;
+            // 
+            // bt_DoiDiem
+            // 
+            this.bt_DoiDiem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
+            this.bt_DoiDiem.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.bt_DoiDiem.FlatAppearance.BorderSize = 3;
+            this.bt_DoiDiem.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_DoiDiem.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.bt_DoiDiem.Image = global::pbl.Properties.Resources.changr;
+            this.bt_DoiDiem.Location = new System.Drawing.Point(2, 43);
+            this.bt_DoiDiem.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_DoiDiem.Name = "bt_DoiDiem";
+            this.bt_DoiDiem.Size = new System.Drawing.Size(125, 43);
+            this.bt_DoiDiem.TabIndex = 7;
+            this.bt_DoiDiem.Text = "Đổi điểm";
+            this.bt_DoiDiem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.bt_DoiDiem.UseVisualStyleBackColor = false;
+            this.bt_DoiDiem.Click += new System.EventHandler(this.bt_DoiDiem_Click);
+            // 
+            // lb_DiemThuong
+            // 
+            this.lb_DiemThuong.AutoSize = true;
+            this.lb_DiemThuong.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_DiemThuong.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lb_DiemThuong.Location = new System.Drawing.Point(4, 7);
+            this.lb_DiemThuong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_DiemThuong.Name = "lb_DiemThuong";
+            this.lb_DiemThuong.Size = new System.Drawing.Size(121, 23);
+            this.lb_DiemThuong.TabIndex = 13;
+            this.lb_DiemThuong.Text = "Điểm thưởng: ";
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.lb_TenKhachHang);
+            this.panel10.Controls.Add(this.lb_IDKhachHang);
+            this.panel10.Location = new System.Drawing.Point(3, 79);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(319, 36);
+            this.panel10.TabIndex = 10;
+            // 
+            // lb_TenKhachHang
+            // 
+            this.lb_TenKhachHang.AutoSize = true;
+            this.lb_TenKhachHang.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_TenKhachHang.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lb_TenKhachHang.Location = new System.Drawing.Point(135, 7);
+            this.lb_TenKhachHang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_TenKhachHang.Name = "lb_TenKhachHang";
+            this.lb_TenKhachHang.Size = new System.Drawing.Size(45, 23);
+            this.lb_TenKhachHang.TabIndex = 12;
+            this.lb_TenKhachHang.Text = "Tên: ";
+            // 
+            // lb_IDKhachHang
+            // 
+            this.lb_IDKhachHang.AutoSize = true;
+            this.lb_IDKhachHang.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_IDKhachHang.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lb_IDKhachHang.Location = new System.Drawing.Point(12, 7);
+            this.lb_IDKhachHang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_IDKhachHang.Name = "lb_IDKhachHang";
+            this.lb_IDKhachHang.Size = new System.Drawing.Size(31, 23);
+            this.lb_IDKhachHang.TabIndex = 11;
+            this.lb_IDKhachHang.Text = "ID:";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Image = global::pbl.Properties.Resources.search44;
+            this.button2.Location = new System.Drawing.Point(252, 38);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(59, 30);
+            this.button2.TabIndex = 3;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // txt_STDKhachHang
             // 
             this.txt_STDKhachHang.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -388,78 +490,6 @@
             this.label7.TabIndex = 9;
             this.label7.Text = "THÔNG TIN KHÁCH HÀNG";
             // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.lb_TenKhachHang);
-            this.panel10.Controls.Add(this.lb_IDKhachHang);
-            this.panel10.Location = new System.Drawing.Point(3, 79);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(319, 36);
-            this.panel10.TabIndex = 10;
-            // 
-            // lb_IDKhachHang
-            // 
-            this.lb_IDKhachHang.AutoSize = true;
-            this.lb_IDKhachHang.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_IDKhachHang.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lb_IDKhachHang.Location = new System.Drawing.Point(12, 7);
-            this.lb_IDKhachHang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lb_IDKhachHang.Name = "lb_IDKhachHang";
-            this.lb_IDKhachHang.Size = new System.Drawing.Size(31, 23);
-            this.lb_IDKhachHang.TabIndex = 11;
-            this.lb_IDKhachHang.Text = "ID:";
-            // 
-            // lb_TenKhachHang
-            // 
-            this.lb_TenKhachHang.AutoSize = true;
-            this.lb_TenKhachHang.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_TenKhachHang.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lb_TenKhachHang.Location = new System.Drawing.Point(135, 7);
-            this.lb_TenKhachHang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lb_TenKhachHang.Name = "lb_TenKhachHang";
-            this.lb_TenKhachHang.Size = new System.Drawing.Size(45, 23);
-            this.lb_TenKhachHang.TabIndex = 12;
-            this.lb_TenKhachHang.Text = "Tên: ";
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.bt_DoiDiem);
-            this.panel11.Controls.Add(this.lb_DiemThuong);
-            this.panel11.Location = new System.Drawing.Point(352, 27);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(176, 88);
-            this.panel11.TabIndex = 11;
-            // 
-            // lb_DiemThuong
-            // 
-            this.lb_DiemThuong.AutoSize = true;
-            this.lb_DiemThuong.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_DiemThuong.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lb_DiemThuong.Location = new System.Drawing.Point(4, 7);
-            this.lb_DiemThuong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lb_DiemThuong.Name = "lb_DiemThuong";
-            this.lb_DiemThuong.Size = new System.Drawing.Size(121, 23);
-            this.lb_DiemThuong.TabIndex = 13;
-            this.lb_DiemThuong.Text = "Điểm thưởng: ";
-            // 
-            // bt_DoiDiem
-            // 
-            this.bt_DoiDiem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
-            this.bt_DoiDiem.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.bt_DoiDiem.FlatAppearance.BorderSize = 3;
-            this.bt_DoiDiem.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_DoiDiem.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.bt_DoiDiem.Image = global::pbl.Properties.Resources.changr;
-            this.bt_DoiDiem.Location = new System.Drawing.Point(2, 43);
-            this.bt_DoiDiem.Margin = new System.Windows.Forms.Padding(4);
-            this.bt_DoiDiem.Name = "bt_DoiDiem";
-            this.bt_DoiDiem.Size = new System.Drawing.Size(125, 43);
-            this.bt_DoiDiem.TabIndex = 7;
-            this.bt_DoiDiem.Text = "Đổi điểm";
-            this.bt_DoiDiem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.bt_DoiDiem.UseVisualStyleBackColor = false;
-            this.bt_DoiDiem.Click += new System.EventHandler(this.bt_DoiDiem_Click);
-            // 
             // bt_Huy
             // 
             this.bt_Huy.BackColor = System.Drawing.Color.White;
@@ -496,34 +526,6 @@
             this.bt_ThanhToan.UseVisualStyleBackColor = false;
             this.bt_ThanhToan.Click += new System.EventHandler(this.bt_ThanhToan_Click);
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = global::pbl.Properties.Resources.search44;
-            this.button2.Location = new System.Drawing.Point(252, 38);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(59, 30);
-            this.button2.TabIndex = 3;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // bt_TimKiem
-            // 
-            this.bt_TimKiem.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.bt_TimKiem.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.bt_TimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_TimKiem.Image = global::pbl.Properties.Resources.search44;
-            this.bt_TimKiem.Location = new System.Drawing.Point(507, -2);
-            this.bt_TimKiem.Margin = new System.Windows.Forms.Padding(4);
-            this.bt_TimKiem.Name = "bt_TimKiem";
-            this.bt_TimKiem.Size = new System.Drawing.Size(97, 30);
-            this.bt_TimKiem.TabIndex = 2;
-            this.bt_TimKiem.UseVisualStyleBackColor = false;
-            this.bt_TimKiem.Click += new System.EventHandler(this.bt_Search_Click);
-            // 
             // ThemHoadon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -550,10 +552,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.ResumeLayout(false);
 
         }

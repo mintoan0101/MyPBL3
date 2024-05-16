@@ -35,7 +35,7 @@ namespace DataAccessLayer
         {
             return db.GetData("select * from khachhang");
         }
-        public DataTable GetData(string query)                    
+        public DataTable GetData(string query)
         {
             return db.GetData(query);
         }
@@ -45,13 +45,13 @@ namespace DataAccessLayer
         }
         public int Delete(string id)
         {
-            return db.ExcuteData("delete from khachhang where ID = '"+id+"'");
+            return db.ExcuteData("delete from khachhang where ID = '" + id + "'");
         }
-        public int Update(string id,KhachHang kh)
+        public int Update(string id, KhachHang kh)
         {
-            return db.ExcuteData("update khachhang set SDT ='"+kh.SDT+"',Ten ='"+kh.Ten+ "', Diem ='" + kh.Diem + "' where ID = '"+kh.ID+"'");
+            return db.ExcuteData("update khachhang set SDT ='" + kh.SDT + "',Ten ='" + kh.Ten + "', Diem ='" + kh.Diem + "' where ID = '" + kh.ID + "'");
         }
-        
+
         public DataTable GetDataBySDT(string SDT)
         {
             return db.GetData("select * from khachhang where SDT = '" + SDT + "'");
@@ -61,6 +61,7 @@ namespace DataAccessLayer
         {
             return db.GetLastId("Select * from KHACHHANG");
         }
+
 
     }
 }

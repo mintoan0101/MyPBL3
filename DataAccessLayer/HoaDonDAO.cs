@@ -56,5 +56,55 @@ namespace DataAccessLayer
         {
             return db.GetLastId("Select * from HOADON");
         }
+
+        public DataTable Search(string searchText, string selectedColumn, double minTotal, double maxTotal)
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT Hoadon.IDHoaDon, Hoadon.NgayTaoHoaDon, Hoadon.TongTien, Hoadon.IDNhanVien, Hoadon.IDKhachHang " +
+                           "FROM Hoadon " +
+                           "INNER JOIN Nhanvien ON Hoadon.IDNhanVien = Nhanvien.IDNhanvien " +
+                           "INNER JOIN Khachhang ON Hoadon.IDKhachHang = Khachhang.ID " +
+                           "WHERE 1=1 ";
+
+            switch (selectedColumn)
+            {
+                case "ID Hoá Đơn":
+                    query += $"AND Hoadon.IDHoaDon like '%{searchText}%' ";
+                    break;
+                case "Ngày Tạo Hoá Đơn":
+                    query += $"AND Hoadon.NgayTaoHoaDon like '%{searchText}%' ";
+                    break;
+                case "Nhân Viên":
+                    query += $"AND (Nhanvien.IDNhanvien = '%{searchText}%' OR Nhanvien.TenNhanVien like '%{searchText}%') ";
+                    break;
+                case "Khách Hàng":
+                    query += $"AND (Khachhang.ID like '%{searchText}%' OR Khachhang.Ten like '%{searchText}%') ";
+                    break;
+                default:
+                    break;
+            }
+
+            if (minTotal != -1)
+            {
+                query += $" AND Hoadon.TongTien > {minTotal} ";
+            }
+
+            if (maxTotal != -1)
+            {
+                query += $" AND Hoadon.TongTien < {maxTotal} ";
+            }
+
+            dt = db.GetData(query);
+            return dt;
+        }
+
+        public HoaDon GetHoaDonFromID(string id)
+        {
+            HoaDon hd = new HoaDon();
+            return hd;
+        }
+
+       
     }
 }
+
