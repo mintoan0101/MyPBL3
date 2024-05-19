@@ -133,18 +133,7 @@ namespace pbl
             }
             
         }
-        //public double Quy_Doi(string st)
-        //{
-        //    string[] p = st.Split('.');
-        //    if (p.Length == 2)
-        //    {
-        //        int d1 = int.Parse(p[0]);
-        //        int d2 = int.Parse(p[1]);
-        //        int count2 = p[1].Length;
-        //        return d1 + d2 / (Math.Pow(10, count2));
-        //    }
-        //    return double.Parse(st);
-        //}
+  
        public void Load_Thong_Tin()
         {
             lbl_id.Text = idsanpham;

@@ -78,5 +78,6 @@ namespace DataAccessLayer
             string s = "SELECT IDNhanVien FROM NHANVIEN JOIN TAIKHOAN ON NHANVIEN.IDTaiKhoan = TAIKHOAN.IDTaiKhoan WHERE TAIKHOAN.TenTaiKhoan = '" + txt + "'";
             return db.GetStringDataCellByQueryCommand(s);
         }
+        
     }
 }

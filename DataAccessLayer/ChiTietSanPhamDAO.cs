@@ -14,7 +14,7 @@ namespace DataAccessLayer
         DBConnection db = new DBConnection();
         public DataTable GetData(string id)
         {
-            return db.GetData("select IDChiTiet,TenNhaPhanPhoi,HanSuDung from chitietsanpham join nhaphanphoi on chitietsanpham.IDNhaPhanPhoi = nhaphanphoi.IDNhaPhanPhoi where IDSanPham = '" + id + "'");
+            return db.GetData("select IDChiTiet,TenNhaPhanPhoi,HanSuDung,SoLuong from chitietsanpham join nhaphanphoi on chitietsanpham.IDNhaPhanPhoi = nhaphanphoi.IDNhaPhanPhoi where IDSanPham = '" + id + "'");
         }
         public DataTable GetData2(string query)
         {
@@ -22,8 +22,8 @@ namespace DataAccessLayer
         }
         public int Insert(ChiTietSanPham ctsp)
         {
-            return db.ExcuteData("insert into chitietsanpham(IDChiTiet,IDSanPham,IDNhaPhanPhoi,HanSuDung) values " +
-                "('" + ctsp.IDChiTiet + "','" + ctsp.IDSanPham + "','" + ctsp.IDNhaPhanPhoi + "','" + ctsp.HanSuDung + "')");
+            return db.ExcuteData("insert into chitietsanpham(IDChiTiet,IDSanPham,IDNhaPhanPhoi,HanSuDung, SoLuong) values " +
+                "('" + ctsp.IDChiTiet + "','" + ctsp.IDSanPham + "','" + ctsp.IDNhaPhanPhoi + "','" + ctsp.HanSuDung + "',"+ctsp.SoLuong+")");
         }
         public int Delete(string id)
         {
@@ -31,7 +31,7 @@ namespace DataAccessLayer
         }
         public int Update(string id, ChiTietSanPham ctsp)
         {
-            return db.ExcuteData("update chitietsanpham set IDNhaPhanPhoi = '" + ctsp.IDNhaPhanPhoi + "',HanSuDung = '" + ctsp.HanSuDung + "' where IDChiTiet = '" + id + "'");
+            return db.ExcuteData("update chitietsanpham set IDNhaPhanPhoi = '" + ctsp.IDNhaPhanPhoi + "',HanSuDung = '" + ctsp.HanSuDung + "',SoLuong = "+ctsp.SoLuong+" where IDChiTiet = '" + id + "'");
         }
         public ChiTietSanPham GetCTSP(string IDChiTiet)
         {
@@ -43,9 +43,9 @@ namespace DataAccessLayer
             ct.HanSuDung = dt.Rows[0][3].ToString();
             return ct;
         }
-        public int CountID()
+        public int CountID(string f)
         {
-            return db.CountRows("select * from chitietsanpham");
+            return db.CountRows("select * from chitietsanpham where IDChiTiet LIKE '%CT"+f+"%'");
         }
 
         public DataTable Search(string PhanLoai, string txt)

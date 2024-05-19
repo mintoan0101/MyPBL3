@@ -31,10 +31,10 @@ namespace pbl
          
             }
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            cb_boloc.SelectedItem = "Tất Cả";
+            
             dataGridView1.DataSource = bus.GetData(idsanpham);
             Load_Nha_Phan_Phoi();
-            
+            Load_Bo_Loc();
         }
 
       
@@ -60,11 +60,28 @@ namespace pbl
                 f.IDSanPham = idsanpham;
                 f.TenNPP = row.Cells[1].Value.ToString();
                 f.HSD = row.Cells[2].Value.ToString();
+                f.SoLuong = int.Parse(row.Cells[3].Value.ToString());
                 f.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Vui lòng chọn chi tiết cần xóa","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count>0)
+            {
+                DataGridViewRow row = dataGridView1.SelectedRows[0];
+                string id = row.Cells[0].Value.ToString();
+                if(bus.Delete(id)>0)
+                {
+                    MessageBox.Show("Đã xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn chi tiết bạn muốn xóa!","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
         }
         private void btn_timkiem_Click(object sender, EventArgs e)
@@ -82,11 +99,22 @@ namespace pbl
             }
             cb_nhaphanphoi.SelectedItem = "Tất Cả";
         }
+        public void Load_Bo_Loc()
+        {
+
+            cb_boloc.Items.Add("Tất Cả");
+            cb_boloc.Items.Add("Đã Hết Hạn");
+            cb_boloc.Items.Add("Chưa Hết Hạn");
+            cb_boloc.Items.Add("Số Lượng < 50");
+            cb_boloc.Items.Add("Số Lượng 50 - 100");
+            cb_boloc.Items.Add("Số Lượng > 100");
+            cb_boloc.SelectedItem = "Tất Cả";
+        }
         public void Hien_Thi_Ket_Qua()
         {
             string npp = cb_nhaphanphoi.SelectedItem.ToString();
             string boloc = cb_boloc.SelectedItem.ToString();
-            string sql = "select IDChiTiet,TenNhaPhanPhoi,HanSuDung from chitietsanpham join nhaphanphoi on chitietsanpham.IDNhaPhanPhoi = nhaphanphoi.IDNhaPhanPhoi where IDSanPham = '" + idsanpham + "' ";
+            string sql = "select IDChiTiet,TenNhaPhanPhoi,HanSuDung,SoLuong from chitietsanpham join nhaphanphoi on chitietsanpham.IDNhaPhanPhoi = nhaphanphoi.IDNhaPhanPhoi where IDSanPham = '" + idsanpham + "' ";
             if(npp == "Tất Cả")
             {
                 if(boloc == "Tất Cả")
@@ -122,9 +150,21 @@ namespace pbl
             {
                 condition += " HanSuDung > CURDATE()";
             }
+            else if(boloc == "Số Lượng < 50")
+            {
+                condition += " SoLuong < 50";
+            }
+            else if (boloc == "Số Lượng 50 - 100")
+            {
+                condition += " SoLuong >= 50 AND SoLuong <= 100";
+            }
+            else if (boloc == "Số Lượng > 100")
+            {
+                condition += " SoLuong > 100";
+            }
             return condition;
         }
 
-       
+        
     }
 }

@@ -39,9 +39,9 @@ namespace BusinessLogicLayer
         {
             return dao.GetCTSP(IDChiTiet);
         }
-        public int CountID()
+        public int CountID(string f)
         {
-            return dao.CountID();
+            return dao.CountID(f);
         }
         public ChiTietSanPham GetChiTietSanPhamByDataRow(DataRow i)
         {

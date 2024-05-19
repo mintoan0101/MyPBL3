@@ -41,15 +41,15 @@ namespace DataAccessLayer
         }
         public int Insert(KhachHang kh)
         {
-            return db.ExcuteData("insert into khachhang(ID,SDT,Ten,Diem) values ('" + kh.ID + "','" + kh.SDT + "','" + kh.Ten + "','" + kh.Diem + "')");
+            return db.ExcuteData("insert into khachhang(IDKhachHang,SDT,Ten,Diem) values ('" + kh.ID + "','" + kh.SDT + "','" + kh.Ten + "','" + kh.Diem + "')");
         }
         public int Delete(string id)
         {
-            return db.ExcuteData("delete from khachhang where ID = '" + id + "'");
+            return db.ExcuteData("delete from khachhang where IDKhachHang = '" + id + "'");
         }
-        public int Update(string id, KhachHang kh)
+        public int Update( KhachHang kh)
         {
-            return db.ExcuteData("update khachhang set SDT ='" + kh.SDT + "',Ten ='" + kh.Ten + "', Diem ='" + kh.Diem + "' where ID = '" + kh.ID + "'");
+            return db.ExcuteData("update khachhang set SDT ='" + kh.SDT + "',Ten ='" + kh.Ten + "', Diem ='" + kh.Diem + "' where IDKhachHang = '" + kh.ID + "'");
         }
 
         public DataTable GetDataBySDT(string SDT)

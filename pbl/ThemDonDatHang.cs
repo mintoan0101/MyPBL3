@@ -10,14 +10,19 @@ using System.Windows.Forms;
 
 namespace pbl
 {
-    public partial class KhoHang1 : Form
+    public partial class ThemDonDatHang : Form
     {
-        public KhoHang1()
+        public ThemDonDatHang()
         {
             InitializeComponent();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void label9_Click(object sender, EventArgs e)
         {
 
         }

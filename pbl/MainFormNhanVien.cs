@@ -95,6 +95,7 @@ namespace pbl
             button2.BackColor = panel3.BackColor;
             button1.BackColor = panel2.BackColor;
             button3.BackColor = panel2.BackColor;
+            button4.BackColor = panel2.BackColor;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -104,6 +105,7 @@ namespace pbl
             button3.BackColor = panel3.BackColor;
             button1.BackColor = panel2.BackColor;
             button2.BackColor = panel2.BackColor;
+            button4.BackColor = panel2.BackColor;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -114,8 +116,17 @@ namespace pbl
             button1.BackColor = panel3.BackColor;
             button3.BackColor = panel2.BackColor;
             button2.BackColor = panel2.BackColor;
+            button4.BackColor = panel2.BackColor;
         }
 
-       
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            ThemDonDatHang f = new ThemDonDatHang();
+            OpenChildForm (f);
+            button4.BackColor = panel3.BackColor;
+            button3.BackColor = panel2.BackColor;
+            button2.BackColor = panel2.BackColor;
+            button1.BackColor = panel2.BackColor;
+        }
     }
 }

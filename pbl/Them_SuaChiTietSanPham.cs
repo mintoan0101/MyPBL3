@@ -18,7 +18,7 @@ namespace pbl
         public string IDSanPham { get; set; }
         public string TenNPP { get; set; }
         public string HSD { get; set; }
-        public bool isDel { get; set; }
+        public int SoLuong { get; set; }
         public bool isEdit { get; set; }
         ChiTietSanPhamBUS bus = new ChiTietSanPhamBUS();
         NhaPhanPhoiBUS nppbus = new NhaPhanPhoiBUS();
@@ -30,7 +30,7 @@ namespace pbl
         private void Them_SuaChiTietSanPham_Load(object sender, EventArgs e)
         {
             Load_Nha_Phan_Phoi();
-            Da_Xoa();
+
             if(isEdit == true)
             {
                 Load_Thong_Tin_Chi_Tiet();
@@ -38,8 +38,7 @@ namespace pbl
             else
             {
                 Load_IDChiTiet();
-                cb_daxoa.SelectedItem = "False";
-                cb_daxoa.Enabled = false;
+             
             }
         }
         //CÁC HÀM XỬ LÍ SỰ KIỆN
@@ -49,24 +48,37 @@ namespace pbl
         }
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            if(isEdit == true)
+            if(CheckSoLuongHopLe())
             {
-                if(bus.Update(IDChiTiet,GetCTSP()) == 1)
+                if (isEdit == true)
                 {
-                    MessageBox.Show("Đã cập nhật thành công","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    this.Close();
+                    if (bus.Update(IDChiTiet, GetCTSP()) == 1)
+                    {
+                        MessageBox.Show("Đã cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                }
+                else
+                {
+
+                    if (bus.Insert(GetCTSP()) == 1)
+                    {
+                        MessageBox.Show("Đã thêm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
                 }
             }
             else
             {
-                
-                if (bus.Insert(GetCTSP()) == 1)
-                {
-                    MessageBox.Show("Đã thêm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
-                }
+                MessageBox.Show("Số lượng nhập vào không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
+        private void btn_exit_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         //CÁC HÀM BỔ TRỢ
         public void Load_Thong_Tin_Chi_Tiet()
         {
@@ -79,7 +91,7 @@ namespace pbl
             int d = int.Parse(parts[0]);
             DateTime dateTimeValue = new DateTime(y, m, d);
             dateTimePicker1.Value = dateTimeValue;
-            cb_daxoa.SelectedItem = (isDel) ? "True" : "False";
+            txt_soluong.Text = SoLuong + "";
         }
         public void Load_Nha_Phan_Phoi()
         {
@@ -89,21 +101,12 @@ namespace pbl
                 cb_npp.Items.Add(s);
             }
         }
-        public void Da_Xoa()
-        {
-            if(isDel == true)
-            {
-                cb_daxoa.SelectedItem = "True";
-            }
-            else
-            {
-                cb_daxoa.SelectedItem = "False";
-            }
-        }
+  
         public void Load_IDChiTiet()
         {
-            int countid = bus.CountID()+1;
-            lbl_id.Text = "CT" + countid;
+            string f = IDSanPham.Substring(0,1);
+            int countid = bus.CountID(f)+1;
+            lbl_id.Text = "CT" + f + countid;
         }
         public ChiTietSanPham GetCTSP()
         {
@@ -113,8 +116,23 @@ namespace pbl
             ctsp.IDSanPham = IDSanPham;
             string[] parts = dateTimePicker1.Value.ToString().Substring(0, 10).Split('/');
             ctsp.HanSuDung = parts[2] + "-" + parts[1] + "-" + parts[0];
-            ctsp.isDelete = (cb_daxoa.SelectedItem == "False") ? false : true;
+            ctsp.SoLuong = int.Parse(txt_soluong.Text) ;
             return ctsp;
         }
+        public bool CheckSoLuongHopLe()
+        {
+            int res = 0;
+            if(int.TryParse(txt_soluong.Text, out res))
+            {
+                return true;
+            }
+            return false;
+        }
+        private void panel9_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+       
     }
 }

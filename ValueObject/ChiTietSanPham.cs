@@ -12,6 +12,6 @@ namespace ValueObject
         public string IDSanPham { get; set;}
         public string IDNhaPhanPhoi { get; set;}
         public string HanSuDung { get; set; }
-        public bool isDelete { get; set; }
+        public int SoLuong {  get; set; }
     }
 }

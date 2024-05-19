@@ -131,7 +131,7 @@ namespace pbl
                 }
   //            int diem = Convert.ToInt32(lb_Tong.Text) / 20000;
  //             kh.Diem += diem;
-                KhachHangBUS.Instance.Update(kh.ID, kh);
+                KhachHangBUS.Instance.Update( kh);
                 MessageBox.Show("Thanh toán thành công");
                 this.Close();
             }
@@ -248,6 +248,11 @@ namespace pbl
             lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
             lb_GiamGia.Text = hd.ChietKhau.ToString();
             lb_Tong.Text = hd.TongTien.ToString();
+        }
+
+        private void ThemHoadon_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

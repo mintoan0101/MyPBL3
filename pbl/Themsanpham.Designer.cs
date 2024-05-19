@@ -40,10 +40,10 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.txt_giatien = new System.Windows.Forms.TextBox();
+            this.lbl_id = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.lbl_id = new System.Windows.Forms.Label();
-            this.txt_giatien = new System.Windows.Forms.TextBox();
             this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -204,6 +204,28 @@
             this.panel9.Size = new System.Drawing.Size(384, 240);
             this.panel9.TabIndex = 45;
             // 
+            // txt_giatien
+            // 
+            this.txt_giatien.BackColor = System.Drawing.Color.White;
+            this.txt_giatien.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_giatien.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_giatien.Location = new System.Drawing.Point(180, 190);
+            this.txt_giatien.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_giatien.Name = "txt_giatien";
+            this.txt_giatien.Size = new System.Drawing.Size(183, 22);
+            this.txt_giatien.TabIndex = 47;
+            // 
+            // lbl_id
+            // 
+            this.lbl_id.BackColor = System.Drawing.Color.White;
+            this.lbl_id.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_id.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbl_id.Location = new System.Drawing.Point(212, 27);
+            this.lbl_id.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_id.Name = "lbl_id";
+            this.lbl_id.Size = new System.Drawing.Size(109, 23);
+            this.lbl_id.TabIndex = 46;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -226,28 +248,6 @@
             this.panel10.Size = new System.Drawing.Size(180, 1);
             this.panel10.TabIndex = 39;
             // 
-            // lbl_id
-            // 
-            this.lbl_id.BackColor = System.Drawing.Color.White;
-            this.lbl_id.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_id.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lbl_id.Location = new System.Drawing.Point(212, 27);
-            this.lbl_id.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_id.Name = "lbl_id";
-            this.lbl_id.Size = new System.Drawing.Size(109, 23);
-            this.lbl_id.TabIndex = 46;
-            // 
-            // txt_giatien
-            // 
-            this.txt_giatien.BackColor = System.Drawing.Color.White;
-            this.txt_giatien.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_giatien.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_giatien.Location = new System.Drawing.Point(180, 190);
-            this.txt_giatien.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_giatien.Name = "txt_giatien";
-            this.txt_giatien.Size = new System.Drawing.Size(183, 22);
-            this.txt_giatien.TabIndex = 47;
-            // 
             // Themsanpham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -257,7 +257,7 @@
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.btn_ok);
             this.Controls.Add(this.btn_exit);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

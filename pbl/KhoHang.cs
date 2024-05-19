@@ -36,17 +36,26 @@ namespace pbl
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             OpenChildForm(new QuanLyNhaPhanPhoi());
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        private void btn_nhapkho_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new KhoHang1());
+            OpenChildForm(new NhapHang());
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btn_donhang_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new NhapKho());
+            OpenChildForm(new DonDatHang());
+        }
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void KhoHang_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -26,7 +26,7 @@ namespace BusinessLogicLayer
             }
             private set { }
         }
-        private KhachHangBUS()
+        public KhachHangBUS()
         {
 
         }
@@ -59,9 +59,9 @@ namespace BusinessLogicLayer
         {
             return KhachHangDAO.Instance.Delete(id);
         }
-        public int Update(string id, KhachHang kh)
+        public int Update( KhachHang kh)
         {
-            return KhachHangDAO.Instance.Update(id, kh);
+            return KhachHangDAO.Instance.Update( kh);
         }
 
         
@@ -120,7 +120,10 @@ namespace BusinessLogicLayer
             }
             return num + "";
         }
-
+        public string GetLastID()
+        {
+            return KhachHangDAO.Instance.GetLastID();
+        }
         
 
 

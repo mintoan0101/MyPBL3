@@ -20,7 +20,10 @@ namespace pbl
             dataGridView1.DataSource = HoaDonBUS.Instance.GetData();
             Load_Bo_Loc();
         }
-
+        private void DanhSachHoaDon_Load(object sender, EventArgs e)
+        {
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
         public void Load_Bo_Loc()
         {
             cbb_BoLoc.Items.Add("Tất Cả");
@@ -100,5 +103,12 @@ namespace pbl
             XemHoaDon f = new XemHoaDon(hd);
             f.ShowDialog();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+       
     }
 }

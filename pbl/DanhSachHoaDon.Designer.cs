@@ -47,11 +47,12 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, -2);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(744, 428);
+            this.panel1.Size = new System.Drawing.Size(744, 430);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel2
             // 
@@ -153,6 +154,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DanhSachHoaDon";
             this.Text = "DanhSachHoaDon";
+            this.Load += new System.EventHandler(this.DanhSachHoaDon_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
