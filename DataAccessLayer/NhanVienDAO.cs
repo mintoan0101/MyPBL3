@@ -22,17 +22,18 @@ namespace DataAccessLayer
         }
         public int Insert(NhanVien nv)
         {
-            return db.ExcuteData("insert into nhanvien(IDNhanVien,IDTaiKhoan,TenNhanVien,NgaySinh,Nam,ViTri,Email,CCCD,SoDienThoai,MucLuong,DiaChi) values" +
-                " ('" + nv.IDNhanVien+"','" +
-                ""+nv.IDTaiKhoan+"','" +
-                ""+nv.TenNhanVien+"','" +
-                ""+nv.SetDinhDangNgaySinh()+"'," +
-                ""+nv.GioiTinh+",'"+nv.ViTri+"','" +
-                ""+nv.Email+"','" +
-                ""+nv.CCCD+"','" +
-                ""+nv.SoDienThoai+"','" +
-                ""+nv.MucLuong+"','" +
-                ""+nv.DiaChi+"') ");
+            //return db.ExcuteData("insert into nhanvien(IDNhanVien,IDTaiKhoan,TenNhanVien,NgaySinh,Nam,ViTri,Email,CCCD,SoDienThoai,MucLuong,DiaChi) values" +
+            //    " ('" + nv.IDNhanVien+"','" +
+            //    ""+nv.IDTaiKhoan+"','" +
+            //    ""+nv.TenNhanVien+"','" +
+            //    ""+nv.SetDinhDangNgaySinh()+"'," +
+            //    ""+nv.GioiTinh+",'"+nv.ViTri+"','" +
+            //    ""+nv.Email+"','" +
+            //    ""+nv.CCCD+"','" +
+            //    ""+nv.SoDienThoai+"','" +
+            //    ""+nv.MucLuong+"','" +
+            //    ""+nv.DiaChi+"') ");
+            return 0;
         }
         public int Delete(string id)
         {
@@ -40,25 +41,27 @@ namespace DataAccessLayer
         }
         public int Update( NhanVien nv)
         {
-            return db.ExcuteData("update nhanvien set TenNhanVien = '" + nv.TenNhanVien + "'," +
-                " NgaySinh = '" + nv.SetDinhDangNgaySinh() + "'," +
-                " Nam = " + nv.GioiTinh +", " +
-                " ViTri = '"+nv.ViTri+"'," +
-                " SoDienThoai = '"+nv.SoDienThoai+"', " +
-                " DiaChi = '"+nv.DiaChi+"'," +
-                " Email = '"+nv.Email+"', " +
-                " CCCD = '"+nv.CCCD+"'," +
-                " MucLuong = "+nv.MucLuong+" WHERE IDNhanVien = '"+nv.IDNhanVien+"'");
+            //return db.ExcuteData("update nhanvien set TenNhanVien = '" + nv.TenNhanVien + "'," +
+            //    " NgaySinh = '" + nv.SetDinhDangNgaySinh() + "'," +
+            //    " Nam = " + nv.GioiTinh +", " +
+            //    " ViTri = '"+nv.ViTri+"'," +
+            //    " SoDienThoai = '"+nv.SoDienThoai+"', " +
+            //    " DiaChi = '"+nv.DiaChi+"'," +
+            //    " Email = '"+nv.Email+"', " +
+            //    " CCCD = '"+nv.CCCD+"'," +
+            //    " MucLuong = "+nv.MucLuong+" WHERE IDNhanVien = '"+nv.IDNhanVien+"'");
+            return 0;
         }
         public int UpdateByNhanVien(NhanVien nv)
         {
-            return db.ExcuteData("update nhanvien set TenNhanVien = '" + nv.TenNhanVien + "'," +
-                " NgaySinh = '" + nv.SetDinhDangNgaySinh() + "'," +
-                " SoDienThoai = '" + nv.SoDienThoai + "', " +
-                " DiaChi = '" + nv.DiaChi + "'," +
-                " Email = '" + nv.Email + "', " +
-                " CCCD = '" + nv.CCCD + "'"+
-              " WHERE IDNhanVien = '" + nv.IDNhanVien + "'");
+            //return db.ExcuteData("update nhanvien set TenNhanVien = '" + nv.TenNhanVien + "'," +
+            //    " NgaySinh = '" + nv.SetDinhDangNgaySinh() + "'," +
+            //    " SoDienThoai = '" + nv.SoDienThoai + "', " +
+            //    " DiaChi = '" + nv.DiaChi + "'," +
+            //    " Email = '" + nv.Email + "', " +
+            //    " CCCD = '" + nv.CCCD + "'"+
+            //  " WHERE IDNhanVien = '" + nv.IDNhanVien + "'");
+            return 0;
         }
         public HashSet<string> GetSeperatedData(string column)
         {

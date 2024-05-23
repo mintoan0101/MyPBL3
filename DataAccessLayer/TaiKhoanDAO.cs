@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 using System.Data;
 using MySql.Data.MySqlClient;
 using ValueObject;
+using System.Data.Entity;
 namespace DataAccessLayer
 {
     public class TaiKhoanDAO
     {
-        DBConnection db = new DBConnection();
+        PBL3Entities db = new PBL3Entities();
         public bool CheckAccount(string username,string password)
         {
-            DataTable dt = db.GetData("select * from taikhoan where TenTaiKhoan = '"+username+"'");
-            if (dt.Rows.Count > 0) // có tài khoản trùng tên
+            var anccount = db.TaiKhoans.Where(p => p.TenTaiKhoan == username).FirstOrDefault();
+            if (anccount != null) //có tài khoản trùng tên
             {
-                string pass = dt.Rows[0]["MatKhau"].ToString();
-                if( pass == password)//trùng cả mật khẩu
+                if(anccount.MatKhau == password)//trùng cả mật khẩu
                 {
                     return true;
                 }
@@ -30,8 +30,8 @@ namespace DataAccessLayer
         }
         public bool CheckAdmin(string username)
         {
-            DataTable dt = db.GetData("select * from taikhoan where TenTaiKhoan = '" + username + "'");
-            if (Convert.ToInt32(dt.Rows[0]["isAdmin"]) == 1)
+            var anccount = db.TaiKhoans.Where(p => p.TenTaiKhoan == username).FirstOrDefault();
+            if (anccount.isAdmin == 1)
             {
                 return true;
             }
@@ -39,17 +39,30 @@ namespace DataAccessLayer
         }
         public string GetLastID()
         {
-            return db.GetLastId("select * from taikhoan");
+            var anccount = db.TaiKhoans.OrderByDescending(p => p).FirstOrDefault();
+            if (anccount != null)
+            {
+                return anccount.IDTaiKhoan;
+            }
+            return null;
         }
         public int Insert(TaiKhoan tk)
         {
-            return db.ExcuteData("insert into taikhoan(IDTaiKhoan,TenTaiKhoan,MatKhau,isAdmin) values " +
-                "('"+tk.IDTaiKhoan+"','"+tk.TenTaiKhoan+"','"+tk.MatKhau+"',0)");
+            db.TaiKhoans.Add(tk);
+            db.SaveChanges();
+            return 1;
         }
         public int Update(TaiKhoan tk)
         {
-            return db.ExcuteData("update taikhoan set TenTaiKhoan = '"+tk.TenTaiKhoan+"', MatKhau = '"+tk.MatKhau+"' where IDTaiKhoan = '"+tk.IDTaiKhoan+"'");
+            var anccount = db.TaiKhoans.Where(p => p.IDTaiKhoan == tk.IDTaiKhoan).FirstOrDefault();
+            if (anccount != null)
+            {
+                anccount = tk;
+                db.SaveChanges();
+                return 1;
+            }
+            return 0;
         }
-       
+
     }
 }

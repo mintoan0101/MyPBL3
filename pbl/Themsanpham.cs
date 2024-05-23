@@ -105,7 +105,7 @@ namespace pbl
             sp.IDSanPham = lbl_id.Text;
             sp.Ten = txt_tensp.Text;
             sp.PhanLoai = cb_phanloai.SelectedItem.ToString();
-            sp.GiaBan = double.Parse(txt_giatien.Text);
+            sp.GiaBan = decimal.Parse(txt_giatien.Text);
             return sp;
         }
         public bool CheckGiaSanPham()
@@ -147,7 +147,7 @@ namespace pbl
             sp.IDSanPham = idsanpham;
             sp.PhanLoai = phanloai;
             sp.Ten = txt_tensp.Text;
-            sp.GiaBan = double.Parse(txt_giatien.Text);
+            sp.GiaBan = decimal.Parse(txt_giatien.Text);
             if(sanphambus.Update(sp) == 1)
             {
                 MessageBox.Show("Đã sửa đổi thành công","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Information);

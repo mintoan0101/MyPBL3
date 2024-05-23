@@ -44,7 +44,7 @@ namespace pbl
                 ThemKhachHang f = new ThemKhachHang(null);
                 f.isEdit = true;
                 f.kh = new KhachHang();
-                f.kh.ID = r.Cells[0].Value.ToString() ;
+                f.kh.IDKhachHang = r.Cells[0].Value.ToString() ;
                 f.kh.Ten = r.Cells[1].Value.ToString();
                 f.kh.SDT = r.Cells[2].Value.ToString();
                 f.kh.Diem = int.Parse(r.Cells[3].Value.ToString());

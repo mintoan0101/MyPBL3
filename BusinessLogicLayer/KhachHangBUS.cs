@@ -37,7 +37,7 @@ namespace BusinessLogicLayer
             DataTable dt = KhachHangDAO.Instance.GetDataBySDT(sdt);
             if (dt.Rows.Count > 0)
             {
-                kh.ID = dt.Rows[0]["ID"].ToString();
+                kh.IDKhachHang = dt.Rows[0]["ID"].ToString();
                 kh.Ten = dt.Rows[0]["Ten"].ToString();
                 kh.SDT = sdt;
                 kh.Diem = Convert.ToInt32(dt.Rows[0]["Diem"]);
@@ -94,7 +94,7 @@ namespace BusinessLogicLayer
                 {
                     SDT = row["SDT"].ToString(),
                     Ten = row["Ten"].ToString(),
-                    ID = row["ID"].ToString(),
+                    IDKhachHang = row["ID"].ToString(),
                     Diem = Convert.ToInt32(row["Diem"])
                 };
 

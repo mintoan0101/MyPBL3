@@ -13,7 +13,6 @@ namespace DataAccessLayer
     public class KhachHangDAO
     {
         DBConnection db = new DBConnection();
-
         private static KhachHangDAO _Instance;
         public static KhachHangDAO Instance
         {
@@ -41,7 +40,7 @@ namespace DataAccessLayer
         }
         public int Insert(KhachHang kh)
         {
-            return db.ExcuteData("insert into khachhang(IDKhachHang,SDT,Ten,Diem) values ('" + kh.ID + "','" + kh.SDT + "','" + kh.Ten + "','" + kh.Diem + "')");
+            return db.ExcuteData("insert into khachhang(IDKhachHang,SDT,Ten,Diem) values ('" + kh.IDKhachHang + "','" + kh.SDT + "','" + kh.Ten + "','" + kh.Diem + "')");
         }
         public int Delete(string id)
         {
@@ -49,7 +48,7 @@ namespace DataAccessLayer
         }
         public int Update( KhachHang kh)
         {
-            return db.ExcuteData("update khachhang set SDT ='" + kh.SDT + "',Ten ='" + kh.Ten + "', Diem ='" + kh.Diem + "' where IDKhachHang = '" + kh.ID + "'");
+            return db.ExcuteData("update khachhang set SDT ='" + kh.SDT + "',Ten ='" + kh.Ten + "', Diem ='" + kh.Diem + "' where IDKhachHang = '" + kh.IDKhachHang + "'");
         }
 
         public DataTable GetDataBySDT(string SDT)

@@ -92,7 +92,7 @@ namespace pbl
         public KhachHang GetKH()
         {
             KhachHang kh = new KhachHang();
-            kh.ID = txt_id.Text;
+            kh.IDKhachHang = txt_id.Text;
             kh.SDT = txt_sdt.Text.Trim();
             kh.Ten = txt_ten.Text;
             kh.Diem = int.Parse(txt_diem.Text.Trim());
@@ -138,7 +138,7 @@ namespace pbl
         }
         public void Load_Thong_Tin()
         {
-            txt_id.Text = kh.ID;
+            txt_id.Text = kh.IDKhachHang;
             txt_ten.Text = kh.Ten;
             txt_sdt.Text = kh.SDT;
             txt_diem.Text = kh.Diem+"";
