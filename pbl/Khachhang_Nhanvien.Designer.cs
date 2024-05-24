@@ -33,7 +33,7 @@
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_sua = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.bg = new System.Windows.Forms.ComboBox();
+            this.cbb_BoLoc = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btn_timkiem = new System.Windows.Forms.Button();
             this.txt_timkiem = new System.Windows.Forms.TextBox();
@@ -116,7 +116,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.panel2.Controls.Add(this.bg);
+            this.panel2.Controls.Add(this.cbb_BoLoc);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(20, 20);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
@@ -124,16 +124,16 @@
             this.panel2.Size = new System.Drawing.Size(704, 49);
             this.panel2.TabIndex = 3;
             // 
-            // bg
+            // cbb_BoLoc
             // 
-            this.bg.DisplayMember = "Sort By";
-            this.bg.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bg.FormattingEnabled = true;
-            this.bg.Location = new System.Drawing.Point(544, 11);
-            this.bg.Margin = new System.Windows.Forms.Padding(4);
-            this.bg.Name = "bg";
-            this.bg.Size = new System.Drawing.Size(140, 28);
-            this.bg.TabIndex = 1;
+            this.cbb_BoLoc.DisplayMember = "Sort By";
+            this.cbb_BoLoc.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbb_BoLoc.FormattingEnabled = true;
+            this.cbb_BoLoc.Location = new System.Drawing.Point(544, 11);
+            this.cbb_BoLoc.Margin = new System.Windows.Forms.Padding(4);
+            this.cbb_BoLoc.Name = "cbb_BoLoc";
+            this.cbb_BoLoc.Size = new System.Drawing.Size(140, 28);
+            this.cbb_BoLoc.TabIndex = 1;
             // 
             // panel3
             // 
@@ -186,6 +186,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(20, 90);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
@@ -222,7 +223,7 @@
         private System.Windows.Forms.Button btn_xoa;
         private System.Windows.Forms.Button btn_sua;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox bg;
+        private System.Windows.Forms.ComboBox cbb_BoLoc;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btn_timkiem;
         private System.Windows.Forms.TextBox txt_timkiem;

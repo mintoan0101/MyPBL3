@@ -115,7 +115,8 @@ namespace pbl
             ctsp.IDNhaPhanPhoi = nppbus.GetIDByName(cb_npp.SelectedItem.ToString());
             ctsp.IDSanPham = IDSanPham;
             string[] parts = dateTimePicker1.Value.ToString().Substring(0, 10).Split('/');
-            ctsp.HanSuDung = parts[2] + "-" + parts[1] + "-" + parts[0];
+            //ctsp.HanSuDung = parts[2] + "-" + parts[1] + "-" + parts[0];
+            ctsp.HanSuDung = dateTimePicker1.Value;
             ctsp.SoLuong = int.Parse(txt_soluong.Text) ;
             return ctsp;
         }

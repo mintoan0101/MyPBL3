@@ -50,7 +50,7 @@ namespace BusinessLogicLayer
                 IDChiTiet = i["IDChiTiet"].ToString(),
                 IDSanPham = i["IDSanPham"].ToString(),
                 IDNhaPhanPhoi = i["IDNhaPhanPhoi"].ToString(),
-                HanSuDung = Convert.ToString(i["HanSuDung"]),
+                HanSuDung = Convert.ToDateTime(i["HanSuDung"]),
             };
         }
         public List<ChiTietSanPham> GetChiTietSanPham(string query)

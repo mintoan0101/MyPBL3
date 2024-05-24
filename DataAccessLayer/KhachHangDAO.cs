@@ -13,7 +13,7 @@ namespace DataAccessLayer
     public class KhachHangDAO
     {
         DBConnection db = new DBConnection();
-
+        PBL3Entities pbl = new PBL3Entities();  
         private static KhachHangDAO _Instance;
         public static KhachHangDAO Instance
         {
@@ -31,36 +31,127 @@ namespace DataAccessLayer
         {
 
         }
-        public DataTable GetData()
+        public List<KhachHang> GetData()
         {
-            return db.GetData("select * from khachhang");
+            var li = pbl.KhachHangs.Select(p => p);
+            return li.ToList();
         }
-        public DataTable GetData(string query)
-        {
-            return db.GetData(query);
-        }
+      
         public int Insert(KhachHang kh)
         {
-            return db.ExcuteData("insert into khachhang(IDKhachHang,SDT,Ten,Diem) values ('" + kh.ID + "','" + kh.SDT + "','" + kh.Ten + "','" + kh.Diem + "')");
+            try
+            {
+                pbl.KhachHangs.Add(kh);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public int Delete(string id)
         {
-            return db.ExcuteData("delete from khachhang where IDKhachHang = '" + id + "'");
+            try
+            {
+                var kh = pbl.KhachHangs.Where(p => p.IDKhachHang == id).FirstOrDefault();
+                pbl.KhachHangs.Remove(kh);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+
         }
-        public int Update( KhachHang kh)
+        public int Update(KhachHang kh)
         {
-            return db.ExcuteData("update khachhang set SDT ='" + kh.SDT + "',Ten ='" + kh.Ten + "', Diem ='" + kh.Diem + "' where IDKhachHang = '" + kh.ID + "'");
+            try
+            {
+                var khachHang = pbl.KhachHangs.Where(p => p.IDKhachHang == kh.IDKhachHang).FirstOrDefault();
+                if (khachHang != null)
+                {
+                    khachHang.SDT = kh.SDT;
+                    khachHang.Ten = kh.Ten;
+                    pbl.SaveChanges();
+                    return 1;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
-        public DataTable GetDataBySDT(string SDT)
+        public KhachHang GetDataBySDT(string SDT)
         {
-            return db.GetData("select * from khachhang where SDT = '" + SDT + "'");
+            KhachHang kh = new KhachHang();
+            kh = pbl.KhachHangs.Where(p => p.SDT == SDT).FirstOrDefault();
+            return kh;
         }
 
         public string GetLastID()
         {
-            return db.GetLastId("Select * from KHACHHANG");
+            var li = pbl.KhachHangs.OrderByDescending(p => p.IDKhachHang).FirstOrDefault().IDKhachHang;
+            return li;
         }
+
+        public double GetTongHoaDon(string idKhachHang)
+        {
+            double? tongHoaDon = pbl.HoaDons.Where(hd => hd.IDKhachHang == idKhachHang).Sum(hd => (double?)hd.TongTien);
+            return tongHoaDon ?? 0;
+        }
+
+        public List<KhachHang> Search(string txt, string PhanLoai, string BoLoc)
+        {
+            var query = pbl.KhachHangs.ToList();
+            Dictionary<string, double> tongHoaDonDict = new Dictionary<string, double>();
+            foreach (var khachHang in query)
+            {
+                tongHoaDonDict[khachHang.IDKhachHang] = GetTongHoaDon(khachHang.IDKhachHang);
+            }
+            if (!string.IsNullOrEmpty(txt))
+            {
+                if (PhanLoai == "Tên")
+                {
+                    txt = txt.ToLower();
+                    query = query.Where(kh => kh.Ten.ToLower().Contains(txt)).ToList();
+                }
+                if (PhanLoai == "SĐT")
+                {
+                    query = query.Where(kh => kh.SDT.Contains(txt)).ToList();
+                }
+            }
+
+            if (BoLoc != "Tất cả")
+            {
+                switch (BoLoc)
+                {
+                    case "< 500k":
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] < 500000).ToList();
+                        break;
+                    case "500k - 1 triệu":
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 500000 && tongHoaDonDict[kh.IDKhachHang] <= 1000000).ToList();
+                        break;
+                    case "1 - 5 triệu":
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 1000000 && tongHoaDonDict[kh.IDKhachHang] <= 5000000).ToList();
+                        break;
+                    case "5 - 17 triệu":
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 5000000 && tongHoaDonDict[kh.IDKhachHang] <= 17000000).ToList();
+                        break;
+                    case "> 17 triệu":
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] > 17000000).ToList();
+                        break;
+                }
+            }
+
+            return query;
+        }
+
+
+
 
 
     }

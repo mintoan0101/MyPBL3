@@ -40,7 +40,7 @@ namespace DataAccessLayer
             ct.IDChiTiet = dt.Rows[0][0].ToString();
             ct.IDSanPham = dt.Rows[0][1].ToString();
             ct.IDNhaPhanPhoi = dt.Rows[0][2].ToString();
-            ct.HanSuDung = dt.Rows[0][3].ToString();
+            ct.HanSuDung = Convert.ToDateTime(dt.Rows[0][3].ToString());
             return ct;
         }
         public int CountID(string f)

@@ -123,9 +123,9 @@ namespace pbl
 
                     
                 }
-                hd.listChiTietHoaDon = listChiTietHoaDon;
+                hd.ChiTietHoaDons = listChiTietHoaDon;
                 HoaDonBUS.Instance.Insert(hd);
-                foreach (ChiTietHoaDon chitiethoadon in hd.listChiTietHoaDon)
+                foreach (ChiTietHoaDon chitiethoadon in hd.ChiTietHoaDons)
                 {
                     ChiTietHoaDonDAO.Instance.Insert(chitiethoadon, hd.IDHoaDon);
                 }
@@ -149,7 +149,7 @@ namespace pbl
             {
                 panel10.Visible = true;
                 panel11.Visible = true;
-                lb_IDKhachHang.Text = "ID: " + kh.ID;
+                lb_IDKhachHang.Text = "ID: " + kh.IDKhachHang;
                 lb_TenKhachHang.Text = "Tên: " + kh.Ten;
                 lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
             }

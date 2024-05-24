@@ -19,7 +19,7 @@ namespace DataAccessLayer
         public MySqlConnection connection;
         public DBConnection()
         {
-            string constr = "server = localhost; user = root; pwd = 010104; database = pbl3; port = 3306";
+            string constr = "server = localhost; user = root; pwd = 123456; database = pbl3; port = 3306";
             connection = new MySqlConnection(constr);
         }
         //Hàm trả về datatable lưu trữ database

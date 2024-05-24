@@ -33,23 +33,11 @@ namespace BusinessLogicLayer
 
         public KhachHang GetKhachHang(string sdt)
         {
-            KhachHang kh = new KhachHang();
-            DataTable dt = KhachHangDAO.Instance.GetDataBySDT(sdt);
-            if (dt.Rows.Count > 0)
-            {
-                kh.ID = dt.Rows[0]["ID"].ToString();
-                kh.Ten = dt.Rows[0]["Ten"].ToString();
-                kh.SDT = sdt;
-                kh.Diem = Convert.ToInt32(dt.Rows[0]["Diem"]);
-            }
-            return kh;
+            return KhachHangDAO.Instance.GetDataBySDT(sdt);
         }
-        public DataTable GetData()
+        public List<KhachHang> GetData()
         {
             return KhachHangDAO.Instance.GetData();
-        }
-        public DataTable GetData(string query) {
-          return KhachHangDAO.Instance.GetData(query);
         }
         public int Insert(KhachHang kh)
         {
@@ -86,21 +74,7 @@ namespace BusinessLogicLayer
 
         public KhachHang GetKhachHangBySDT(string SDT)
         {
-            DataTable dataTable = KhachHangDAO.Instance.GetDataBySDT(SDT);
-            if (dataTable.Rows.Count > 0)
-            {
-                DataRow row = dataTable.Rows[0];
-                KhachHang kh = new KhachHang
-                {
-                    SDT = row["SDT"].ToString(),
-                    Ten = row["Ten"].ToString(),
-                    ID = row["ID"].ToString(),
-                    Diem = Convert.ToInt32(row["Diem"])
-                };
-
-                return kh;
-            }
-            return null;
+            return KhachHangDAO.Instance.GetDataBySDT( SDT );
         }
 
         public string SetID()
@@ -125,6 +99,10 @@ namespace BusinessLogicLayer
             return KhachHangDAO.Instance.GetLastID();
         }
         
+        public List<KhachHang> Search (string txt, string PhanLoai, string BoLoc)
+        {
+            return KhachHangDAO.Instance.Search(txt, PhanLoai, BoLoc);
+        }
 
 
     }

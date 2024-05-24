@@ -143,7 +143,7 @@ namespace pbl
                     nv.IDNhanVien = txt_idnv.Text;
                     nv.DiaChi = txt_diachi.Text;
                     nv.NgaySinh = dateTimePicker1.Value;
-                    nv.GioiTinh = (rad_nam.Checked) ? true : false;
+                    nv.Nam = (rad_nam.Checked) ? true : false;
                     nv.ViTri = cb_vitri.SelectedItem.ToString();
                     nv.SoDienThoai = txt_sdt.Text;
                     nv.IDTaiKhoan = txt_idtk.Text;
@@ -252,7 +252,7 @@ namespace pbl
                     nv.IDTaiKhoan = txt_idtk.Text;
                     nv.TenNhanVien = txt_hovaten.Text;
                     nv.NgaySinh = dateTimePicker1.Value;
-                    nv.GioiTinh = (rad_nam.Checked == true) ? true : false;
+                    nv.Nam = (rad_nam.Checked == true) ? true : false;
                     nv.Email = txt_email.Text;
                     nv.ViTri = cb_vitri.SelectedItem.ToString();
                     nv.CCCD = txt_cccd.Text;

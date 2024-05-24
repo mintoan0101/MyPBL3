@@ -26,7 +26,6 @@ namespace pbl
         {
             if(isEdit)
             {
-                Load_Thong_Tin();
                 txt_diem.Enabled = true;
             }
             else
@@ -43,6 +42,8 @@ namespace pbl
                 KhachHang kh = KhachHangBUS.Instance.GetKhachHangBySDT(sdt);
                 txt_sdt.Text = sdt;
                 txt_ten.Text = kh.Ten;
+                txt_diem.Text = kh.Diem.ToString();
+                txt_id.Text = kh.IDKhachHang;
             }
         }
         private void btn_ok_Click(object sender, EventArgs e)
@@ -92,7 +93,7 @@ namespace pbl
         public KhachHang GetKH()
         {
             KhachHang kh = new KhachHang();
-            kh.ID = txt_id.Text;
+            kh.IDKhachHang = txt_id.Text;
             kh.SDT = txt_sdt.Text.Trim();
             kh.Ten = txt_ten.Text;
             kh.Diem = int.Parse(txt_diem.Text.Trim());
@@ -118,9 +119,17 @@ namespace pbl
         }
         public bool CheckSDT()
         {
-            if (txt_sdt.Text.Length != 10)
+            string sdt = txt_sdt.Text.Trim();
+            if (sdt.Length != 10)
             {
                 return false;
+            }
+            foreach (char c in sdt)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -136,12 +145,6 @@ namespace pbl
             }
             return false;
         }
-        public void Load_Thong_Tin()
-        {
-            txt_id.Text = kh.ID;
-            txt_ten.Text = kh.Ten;
-            txt_sdt.Text = kh.SDT;
-            txt_diem.Text = kh.Diem+"";
-        }
+        
     }
 }
