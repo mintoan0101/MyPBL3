@@ -41,13 +41,9 @@ namespace pbl
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = dataGridView1.SelectedRows[0];
-                ThemKhachHang f = new ThemKhachHang(null);
+                ThemKhachHang f = new ThemKhachHang(r.Cells["SDT"].Value.ToString());
                 f.isEdit = true;
-                f.kh = new KhachHang();
-                f.kh.IDKhachHang = r.Cells[0].Value.ToString() ;
-                f.kh.Ten = r.Cells[1].Value.ToString();
-                f.kh.SDT = r.Cells[2].Value.ToString();
-                f.kh.Diem = int.Parse(r.Cells[3].Value.ToString());
+                f.kh = KhachHangBUS.Instance.GetKhachHangBySDT(r.Cells[0].Value.ToString());
                 f.ShowDialog();
             }
             else
@@ -58,7 +54,10 @@ namespace pbl
 
         private void btn_timkiem_Click(object sender, EventArgs e)
         {
-            Hien_Thi_Tim_Kiem();
+            string txt = txt_timkiem.Text;
+            string phanloai = cb_thuoctinh.SelectedItem.ToString();
+            string boloc = cbb_BoLoc.SelectedItem.ToString();   
+            dataGridView1.DataSource = KhachHangBUS.Instance.Search(txt, phanloai, boloc);
         }
         private void btn_xoa_Click(object sender, EventArgs e)
         {
@@ -87,27 +86,21 @@ namespace pbl
         }
         public void Load_Thuoc_Tinh()
         {
-            cb_thuoctinh.Items.Add("SDT");
-            cb_thuoctinh.Items.Add("Ten");
-            cb_thuoctinh.SelectedItem = "SDT";
+            cb_thuoctinh.Items.Add("SĐT");
+            cb_thuoctinh.Items.Add("Tên");
+            cb_thuoctinh.SelectedItem = "SĐT";
         }
         public void Load_BoLoc()
         {
-
+            cbb_BoLoc.Items.Add("< 500k");
+            cbb_BoLoc.Items.Add("500k - 1 triệu");
+            cbb_BoLoc.Items.Add("1 - 5 triệu");
+            cbb_BoLoc.Items.Add("5 - 17 triệu");
+            cbb_BoLoc.Items.Add(" > 17 triệu");
+            cbb_BoLoc.Items.Add("Tất cả");
+            cbb_BoLoc.SelectedItem = "Tất cả";
         }
-        public void Hien_Thi_Tim_Kiem()
-        {
-            string ten_tim_kiem = txt_timkiem.Text;
-            string ten_thuoc_tinh = cb_thuoctinh.SelectedItem.ToString();
-            if(ten_tim_kiem == "")
-            {
-                Load_Khach_Hang();
-            }
-            else
-            {
-               dataGridView1.DataSource =  bus.GetData("select * from khachhang where "+ten_thuoc_tinh+" LIKE '%"+ten_tim_kiem+"%'");   
-            }
-        }
+       
 
      
     }

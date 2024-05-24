@@ -180,7 +180,7 @@
             // 
             this.btn_thoat.BackColor = System.Drawing.Color.White;
             this.btn_thoat.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btn_thoat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_thoat.FlatAppearance.BorderSize = 3;
             this.btn_thoat.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_thoat.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.btn_thoat.Image = global::pbl.Properties.Resources.thoat;
@@ -198,7 +198,6 @@
             // 
             this.btn_dangnhap.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btn_dangnhap.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btn_dangnhap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_dangnhap.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_dangnhap.ForeColor = System.Drawing.Color.White;
             this.btn_dangnhap.Image = global::pbl.Properties.Resources.dangnhap;
