@@ -12,9 +12,11 @@ namespace DataAccessLayer
     public class NhanVienDAO
     {
         DBConnection db = new DBConnection();
-        public DataTable GetData()
+        PBL3Entities pbl = new PBL3Entities();
+        public List<NhanVien> GetData()
         {
-            return db.GetData("select * from nhanvien");
+            var li = pbl.NhanViens.Select(p => p).ToList();
+            return li;
         }
         public DataTable GetData(string query)
         {
@@ -22,35 +24,56 @@ namespace DataAccessLayer
         }
         public int Insert(NhanVien nv)
         {
-            //return db.ExcuteData("insert into nhanvien(IDNhanVien,IDTaiKhoan,TenNhanVien,NgaySinh,Nam,ViTri,Email,CCCD,SoDienThoai,MucLuong,DiaChi) values" +
-            //    " ('" + nv.IDNhanVien+"','" +
-            //    ""+nv.IDTaiKhoan+"','" +
-            //    ""+nv.TenNhanVien+"','" +
-            //    ""+nv.SetDinhDangNgaySinh()+"'," +
-            //    ""+nv.GioiTinh+",'"+nv.ViTri+"','" +
-            //    ""+nv.Email+"','" +
-            //    ""+nv.CCCD+"','" +
-            //    ""+nv.SoDienThoai+"','" +
-            //    ""+nv.MucLuong+"','" +
-            //    ""+nv.DiaChi+"') ");
-            return 0;
+            try
+            {
+                pbl.NhanViens.Add(nv);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public int Delete(string id)
         {
-            return db.ExcuteData("delete from nhanvien where IDNhanVien = '"+id+"'");
+            try
+            {
+                var nv = pbl.NhanViens.Where(p => p.IDNhanVien == id).FirstOrDefault();
+                pbl.NhanViens.Remove(nv);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public int Update( NhanVien nv)
         {
-            //return db.ExcuteData("update nhanvien set TenNhanVien = '" + nv.TenNhanVien + "'," +
-            //    " NgaySinh = '" + nv.SetDinhDangNgaySinh() + "'," +
-            //    " Nam = " + nv.GioiTinh +", " +
-            //    " ViTri = '"+nv.ViTri+"'," +
-            //    " SoDienThoai = '"+nv.SoDienThoai+"', " +
-            //    " DiaChi = '"+nv.DiaChi+"'," +
-            //    " Email = '"+nv.Email+"', " +
-            //    " CCCD = '"+nv.CCCD+"'," +
-            //    " MucLuong = "+nv.MucLuong+" WHERE IDNhanVien = '"+nv.IDNhanVien+"'");
-            return 0;
+            try
+            {
+                var nhanVien = pbl.NhanViens.Where(p => p.IDNhanVien == nv.IDNhanVien).FirstOrDefault();
+                if (nhanVien != null)
+                {
+                    nhanVien.TenNhanVien = nv.TenNhanVien;
+                    nhanVien.DiaChi = nv.DiaChi;
+                    nhanVien.ViTri = nv.ViTri;
+                    nhanVien.CCCD = nv.CCCD;
+                    nhanVien.Email = nv.Email;
+                    nhanVien.MucLuong = nv.MucLuong;
+                    nhanVien.Nam = nv.Nam;
+                    nhanVien.NgaySinh = nv.NgaySinh;
+                    nhanVien.SoDienThoai = nv.SoDienThoai;
+                    pbl.SaveChanges();
+                    return 1;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public int UpdateByNhanVien(NhanVien nv)
         {

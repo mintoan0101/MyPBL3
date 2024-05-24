@@ -162,7 +162,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__NhanVien__IDTaiK__4BAC3F29">
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
@@ -387,7 +389,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__NhanVien__IDTaiK__4BAC3F29">
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">

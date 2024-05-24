@@ -74,6 +74,7 @@ namespace DataAccessLayer
                 {
                     khachHang.SDT = kh.SDT;
                     khachHang.Ten = kh.Ten;
+                    khachHang.Diem = kh.Diem;
                     pbl.SaveChanges();
                     return 1;
                 }
@@ -130,19 +131,19 @@ namespace DataAccessLayer
                 switch (BoLoc)
                 {
                     case "< 500k":
-                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] < 500000).ToList();
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] < 500).ToList();
                         break;
                     case "500k - 1 triệu":
-                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 500000 && tongHoaDonDict[kh.IDKhachHang] <= 1000000).ToList();
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 500 && tongHoaDonDict[kh.IDKhachHang] <= 1000).ToList();
                         break;
                     case "1 - 5 triệu":
-                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 1000000 && tongHoaDonDict[kh.IDKhachHang] <= 5000000).ToList();
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 1000 && tongHoaDonDict[kh.IDKhachHang] <= 5000).ToList();
                         break;
                     case "5 - 17 triệu":
-                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 5000000 && tongHoaDonDict[kh.IDKhachHang] <= 17000000).ToList();
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] >= 5000 && tongHoaDonDict[kh.IDKhachHang] <= 17000).ToList();
                         break;
                     case "> 17 triệu":
-                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] > 17000000).ToList();
+                        query = query.Where(kh => tongHoaDonDict[kh.IDKhachHang] > 17000).ToList();
                         break;
                 }
             }

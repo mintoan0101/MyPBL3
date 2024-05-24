@@ -12,7 +12,7 @@ namespace BusinessLogicLayer
     public class NhanVienBUS
     {
         NhanVienDAO dao = new NhanVienDAO();
-        public DataTable GetData()
+        public List<NhanVien> GetData()
         {
             return dao.GetData();
         }

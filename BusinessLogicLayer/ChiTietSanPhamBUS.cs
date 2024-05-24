@@ -35,9 +35,9 @@ namespace BusinessLogicLayer
         {
             return dao.Delete(id);
         }
-        public int Update(string id, ChiTietSanPham ctsp)
+        public int Update(ChiTietSanPham ctsp)
         {
-            return dao.Update(id, ctsp);
+            return dao.Update(ctsp);
         }
         public ChiTietSanPham GetCTSP(string IDChiTiet)
         {

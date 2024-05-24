@@ -135,15 +135,16 @@ namespace pbl
         }
         public bool CheckDiem()
         {
-            int res = 0;
-            if(int.TryParse(txt_diem.Text, out res))
-            {
-                if (res > 0 && res%10 == 0)
-                {
-                    return true;
-                }
-            }
-            return false;
+            //int res = 0;
+            //if(int.TryParse(txt_diem.Text, out res))
+            //{
+            //    if (res > 0 && res%10 == 0)
+            //    {
+            //        return true;
+            //    }
+            //}
+            //return false;
+            return true;
         }
         
     }

@@ -77,7 +77,7 @@ namespace pbl
         //CÁC HÀM BỔ TRỢ
         public void Load_Phan_Loai()
         {
-            HashSet<string> list = sanphambus.GetSeperatedDataByColumn("PhanLoai");
+            List<string> list = sanphambus.GetSeperatedDataByColumn();
             foreach (string s in list) 
             {
                 cb_phanloai.Items.Add(s);                             
