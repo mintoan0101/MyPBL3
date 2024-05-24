@@ -11,6 +11,7 @@ namespace DataAccessLayer
     public class HoaDonDAO
     {
         DBConnection db = new DBConnection();
+        PBL3Entities pbl = new PBL3Entities();
 
         private static HoaDonDAO _Instance;
         public static HoaDonDAO Instance
@@ -29,9 +30,10 @@ namespace DataAccessLayer
         {
 
         }
-        public DataTable GetData()
+        public List<HoaDon> GetData()
         {
-            return db.GetData("select * from hoadon");
+            var list = pbl.HoaDons.Select(p => p).ToList();
+            return list;
         }
 
         public DataTable GetData(string query)
@@ -41,69 +43,69 @@ namespace DataAccessLayer
 
         public int Insert(HoaDon hd)
         {
-            string query = "INSERT INTO HOADON (IDHoaDon, IDNhanVien, NgayTaoHoaDon, IDKhachHang, ChietKhau, TongTien) " +
-                           "VALUES ('" + hd.IDHoaDon + "', '" + hd.IDNhanVien + "', '" + hd.NgayTaoHoaDon.ToString("yyyy-MM-dd") + "', '" +
-                           hd.IDKhachHang + "', '" + hd.ChietKhau + "', '" + hd.TongTien + "')";
-            //foreach (ChiTietHoaDon chitiethoadon in hd.listChiTietHoaDon)
-            //{
-            //    ChiTietHoaDonDAO.Instance.Insert(chitiethoadon, hd.IDHoaDon);
-            //}
-
-            return db.ExcuteData(query);
+            try
+            {
+                pbl.HoaDons.Add(hd);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
         public string GetLastID()
         {
-            return db.GetLastId("Select * from HOADON");
+            var li = pbl.HoaDons.OrderByDescending(p => p.IDHoaDon).FirstOrDefault().IDHoaDon;
+            return li;
         }
 
-        public DataTable Search(string searchText, string selectedColumn, double minTotal, double maxTotal)
+        public List<HoaDon> Search(string txt, string phanloai, string boloc)
         {
-            DataTable dt = new DataTable();
-            string query = "SELECT Hoadon.IDHoaDon, Hoadon.NgayTaoHoaDon, Hoadon.TongTien, Hoadon.IDNhanVien, Hoadon.IDKhachHang " +
-                           "FROM Hoadon " +
-                           "INNER JOIN Nhanvien ON Hoadon.IDNhanVien = Nhanvien.IDNhanvien " +
-                           "INNER JOIN Khachhang ON Hoadon.IDKhachHang = Khachhang.ID " +
-                           "WHERE 1=1 ";
-
-            switch (selectedColumn)
+            var query = pbl.HoaDons.Select(p => p);
+            if (string.IsNullOrEmpty(txt) == false)
             {
-                case "ID Hoá Đơn":
-                    query += $"AND Hoadon.IDHoaDon like '%{searchText}%' ";
-                    break;
-                case "Ngày Tạo Hoá Đơn":
-                    query += $"AND Hoadon.NgayTaoHoaDon like '%{searchText}%' ";
-                    break;
-                case "Nhân Viên":
-                    query += $"AND (Nhanvien.IDNhanvien = '%{searchText}%' OR Nhanvien.TenNhanVien like '%{searchText}%') ";
-                    break;
-                case "Khách Hàng":
-                    query += $"AND (Khachhang.ID like '%{searchText}%' OR Khachhang.Ten like '%{searchText}%') ";
-                    break;
-                default:
-                    break;
+                switch (phanloai)
+                {
+                    case "ID Hoá Đơn":
+                        query = query.Where(hd => hd.IDHoaDon.Contains(txt));
+                        break;
+                    case "Ngày Tạo Hoá Đơn":
+                        // Không thể sử dụng like trong LINQ to Entities với DateTime
+                        break;
+                    case "Nhân Viên":
+                        query = query.Where(hd => hd.NhanVien.IDTaiKhoan.Contains(txt) || hd.NhanVien.TenNhanVien.Contains(txt));
+                        break;
+                    case "Khách Hàng":
+                        query = query.Where(hd => hd.KhachHang.IDKhachHang.Contains(txt) || hd.KhachHang.Ten.Contains(txt));
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            if (minTotal != -1)
+            if (boloc != "Tất Cả")
             {
-                query += $" AND Hoadon.TongTien > {minTotal} ";
+                switch (boloc)
+                {
+                    case "< 100K":
+                        query = query.Where(hd => hd.TongTien < 100000);
+                        break;
+                    case "100K - 500K":
+                        query = query.Where(hd => hd.TongTien >= 100000 && hd.TongTien <= 500000);
+                        break;
+                    case "500K - 1000K":
+                        query = query.Where(hd => hd.TongTien >= 500000 && hd.TongTien <= 1000000);
+                        break;
+                    case "> 1000K":
+                        query = query.Where(hd => hd.TongTien > 1000000);
+                        break;
+                }
             }
 
-            if (maxTotal != -1)
-            {
-                query += $" AND Hoadon.TongTien < {maxTotal} ";
-            }
-
-            dt = db.GetData(query);
-            return dt;
+            return query.ToList();
         }
-
-        public HoaDon GetHoaDonFromID(string id)
-        {
-            HoaDon hd = new HoaDon();
-            return hd;
-        }
-
        
     }
 }

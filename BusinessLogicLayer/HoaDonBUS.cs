@@ -29,7 +29,7 @@ namespace BusinessLogicLayer
 
         }
 
-        public DataTable GetData()
+        public List<HoaDon> GetData()
         {
             return HoaDonDAO.Instance.GetData();
         }
@@ -44,9 +44,9 @@ namespace BusinessLogicLayer
             return HoaDonDAO.Instance.Insert(hd);
         }
 
-        public DataTable Search(string searchText, string selectedColumn, double minTotal, double maxTotal)
+        public List<HoaDon> Search(string txt, string phanloai, string boloc)
         {
-            return HoaDonDAO.Instance.Search(searchText, selectedColumn, minTotal, maxTotal);
+            return HoaDonDAO.Instance.Search(txt, phanloai, boloc);
         }
 
         public string GetLastID()
