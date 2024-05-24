@@ -45,30 +45,7 @@ namespace pbl
             string phanloai = cbb_PhanLoai.SelectedItem.ToString();
             string boloc = cbb_BoLoc.SelectedItem.ToString();
 
-            double minTotal = -1;
-            double maxTotal = -1;
-
-            switch (boloc)
-            {
-                case "< 100K":
-                    maxTotal = 100;
-                    break;
-                case "100K - 500K":
-                    minTotal = 100;
-                    maxTotal = 500;
-                    break;
-                case "500K - 1000K":
-                    minTotal = 500;
-                    maxTotal = 1000;
-                    break;
-                case "> 1000K":
-                    minTotal = 1000;
-                    break;
-                default:
-                    break;
-            }
-
-            dataGridView1.DataSource = HoaDonBUS.Instance.Search(search, phanloai, minTotal, maxTotal);
+            dataGridView1.DataSource = HoaDonBUS.Instance.Search(search, phanloai, boloc);
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

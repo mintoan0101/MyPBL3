@@ -12,6 +12,7 @@ namespace DataAccessLayer
     public class ChiTietHoaDonDAO
     {
         DBConnection db = new DBConnection();
+        PBL3Entities pbl = new PBL3Entities();
 
         private static ChiTietHoaDonDAO _Instance;
         public static ChiTietHoaDonDAO Instance
@@ -30,22 +31,24 @@ namespace DataAccessLayer
         {
 
         }
-        public int Insert(ChiTietHoaDon cthd, string idHoaDon)
+        public int Insert(ChiTietHoaDon cthd)
         {
-            string query = "INSERT INTO CHITIETHOADON (IDHoaDon, IDChiTiet, SoLuong) " +
-                           "VALUES ('" + idHoaDon + "', '" + cthd.IDChiTiet + "', " + cthd.SoLuong + ")";
-
-            return db.ExcuteData(query);
+            try
+            {
+                pbl.ChiTietHoaDons.Add(cthd);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
-        public DataTable GetData(string ID)
+        public List<dynamic> GetData(string ID)
         {
-            string query = "SELECT sanpham.Ten AS 'Sản Phẩm', chitiethoadon.SoLuong AS 'Số Lượng', sanpham.GiaBan AS 'Đơn Giá' " +
-                           "FROM CHITIETHOADON chitiethoadon " +
-                           "JOIN CHITIETSANPHAM chitietsanpham ON chitiethoadon.IDChiTiet = chitietsanpham.IDChiTiet " +
-                           "JOIN SANPHAM sanpham ON chitietsanpham.IDSanPham = sanpham.IDSanPham"
-                           + " WHERE CHITIETHOADON.IDHoaDon = '" + ID + "'";
-
-            return db.GetData(query);
+            var li = pbl.ChiTietHoaDons.Where(p => p.IDHoaDon == ID)
+                                       .Select(p => new { p.ChiTietSanPham.SanPham.Ten, p.SoLuong, p.ChiTietSanPham.SanPham.GiaBan });
+            return li.ToList<dynamic>();
         }
 
     }

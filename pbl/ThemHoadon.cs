@@ -22,6 +22,7 @@ namespace pbl
         private ChiTietSanPhamBUS ctspBUS = new ChiTietSanPhamBUS();
         private SanPhamBUS spBUS = new SanPhamBUS();
         private NhanVienBUS nvBUS = new NhanVienBUS();
+        private bool DaDoiDiem = new bool();
         public ThemHoadon()
         {
             InitializeComponent();
@@ -64,16 +65,7 @@ namespace pbl
 
         public void Load_DS_San_Pham()
         {
-            string query = "SELECT " +
-                           "chitietsanpham.IDChiTiet AS 'ID Chi Tiết', " +
-                           "sanpham.Ten AS 'Tên Sản Phẩm', " +
-                           "sanpham.PhanLoai AS 'Phân Loại', " +
-                           "sanpham.GiaBan AS 'Giá Bán', " +
-                           "chitietsanpham.SoLuong AS 'Số Lượng', " +
-                           "chitietsanpham.HanSuDung AS 'Hạn Sử Dụng' " +
-                           "FROM CHITIETSANPHAM chitietsanpham " +
-                           "JOIN SANPHAM sanpham ON chitietsanpham.IDSanPham = sanpham.IDSanPham";
-            dataGridView1.DataSource = ctspBUS.GetData2(query);
+            dataGridView1.DataSource = ctspBUS.GetData1();
         }
 
         private void AddColumnsToDataGridView2()
@@ -114,6 +106,7 @@ namespace pbl
                     {
                         ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon
                         {
+                            IDHoaDon = hd.IDHoaDon,
                             IDChiTiet = row.Cells["IDChiTiet"].Value.ToString(),
                             SoLuong = Convert.ToInt32(row.Cells["SoLuong"].Value)
                         };
@@ -127,7 +120,7 @@ namespace pbl
                 HoaDonBUS.Instance.Insert(hd);
                 foreach (ChiTietHoaDon chitiethoadon in hd.ChiTietHoaDons)
                 {
-                    ChiTietHoaDonDAO.Instance.Insert(chitiethoadon, hd.IDHoaDon);
+                    ChiTietHoaDonDAO.Instance.Insert(chitiethoadon);
                 }
   //            int diem = Convert.ToInt32(lb_Tong.Text) / 20000;
  //             kh.Diem += diem;
@@ -169,12 +162,12 @@ namespace pbl
                 DataGridViewRow newRow = new DataGridViewRow();
                 newRow.CreateCells(dataGridView2);
                 newRow.Cells[0].Value = currentRow.Cells[0].Value;
-                newRow.Cells[1].Value = currentRow.Cells[1].Value;
+                newRow.Cells[1].Value = currentRow.Cells[3].Value;
                 newRow.Cells[2].Value = 1; 
-                newRow.Cells[3].Value = currentRow.Cells[3].Value;
-                if (int.TryParse(currentRow.Cells["Số Lượng"].Value?.ToString(), out int soLuongCoSan))
+                newRow.Cells[3].Value = currentRow.Cells[4].Value;
+                if (int.TryParse(currentRow.Cells["SoLuong"].Value?.ToString(), out int soLuongCoSan))
                 {
-                    currentRow.Cells["Số Lượng"].Value = soLuongCoSan - 1;
+                    currentRow.Cells["SoLuong"].Value = soLuongCoSan - 1;
                 }
                 dataGridView2.Rows.Add(newRow);
                 double thanhtien = 0.0;
@@ -203,7 +196,7 @@ namespace pbl
                     DataGridViewRow currentRowInDataGridView1 = null;
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     { 
-                        if (row.Cells["ID Chi Tiết"].Value?.ToString() == idChiTiet)
+                        if (row.Cells["IDChiTiet"].Value?.ToString() == idChiTiet)
                         {
                         currentRowInDataGridView1 = row;
                             break;
@@ -212,7 +205,7 @@ namespace pbl
 
                     if (currentRowInDataGridView1 != null)
                     {
-                        if (double.TryParse(currentRowInDataGridView1.Cells["Số Lượng"].Value?.ToString(), out double soLuongCoSan))
+                        if (double.TryParse(currentRowInDataGridView1.Cells["SoLuong"].Value?.ToString(), out double soLuongCoSan))
                         {
                             if (soLuongMoi > soLuongCoSan)
                             {
@@ -239,15 +232,19 @@ namespace pbl
 
         private void bt_DoiDiem_Click(object sender, EventArgs e)
         {
-            HoaDon hd = new HoaDon();
-            hd.IDHoaDon = lb_ID.Text;
-            hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
-            hd.TongTien = Convert.ToDouble(lb_Tong.Text);
-            KhachHangBUS.Instance.DoiDiem(hd, kh);
-            MessageBox.Show(kh.Diem.ToString());
-            lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
-            lb_GiamGia.Text = hd.ChietKhau.ToString();
-            lb_Tong.Text = hd.TongTien.ToString();
+            if (DaDoiDiem == false)
+            {
+                HoaDon hd = new HoaDon();
+                hd.IDHoaDon = lb_ID.Text;
+                hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
+                hd.TongTien = Convert.ToDouble(lb_Tong.Text);
+                KhachHangBUS.Instance.DoiDiem(hd, kh);
+                lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
+                lb_GiamGia.Text = hd.ChietKhau.ToString();
+                lb_Tong.Text = hd.TongTien.ToString();
+                DaDoiDiem = true;
+            }
+                      
         }
 
         private void ThemHoadon_Load(object sender, EventArgs e)

@@ -29,12 +29,12 @@ namespace BusinessLogicLayer
 
         }
 
-        public int Insert(ChiTietHoaDon cthd, string idHoaDon)
+        public int Insert(ChiTietHoaDon cthd)
         {
-            return ChiTietHoaDonDAO.Instance.Insert(cthd, idHoaDon);
+            return ChiTietHoaDonDAO.Instance.Insert(cthd);
         }
 
-        public DataTable GetData(string ID)
+        public List<dynamic> GetData(string ID)
         {
             return ChiTietHoaDonDAO.Instance.GetData(ID);
         }

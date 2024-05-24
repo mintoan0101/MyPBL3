@@ -15,9 +15,13 @@ namespace BusinessLogicLayer
     {
         ChiTietSanPhamDAO dao = new ChiTietSanPhamDAO();
 
-        public DataTable GetData(string id)
+        public List<ChiTietSanPham> GetData(string id)
         {
             return dao.GetData(id);
+        }
+        public List<dynamic> GetData1()
+        {
+            return dao.GetData1();  
         }
         public DataTable GetData2(string query)
         {
@@ -63,7 +67,7 @@ namespace BusinessLogicLayer
             return result;
         }
 
-        public DataTable Search(string PhanLoai, string txt)
+        public List<dynamic> Search(string PhanLoai, string txt)
         {
             return dao.Search(PhanLoai, txt);
         }

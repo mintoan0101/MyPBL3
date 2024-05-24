@@ -12,9 +12,25 @@ namespace DataAccessLayer
     public class ChiTietSanPhamDAO
     {
         DBConnection db = new DBConnection();
-        public DataTable GetData(string id)
+        PBL3Entities pbl = new PBL3Entities();
+        public List<ChiTietSanPham> GetData(string id)
         {
-            return db.GetData("select IDChiTiet,TenNhaPhanPhoi,HanSuDung,SoLuong from chitietsanpham join nhaphanphoi on chitietsanpham.IDNhaPhanPhoi = nhaphanphoi.IDNhaPhanPhoi where IDSanPham = '" + id + "'");
+            var li = pbl.ChiTietSanPhams.Where(p => p.IDSanPham == id).ToList();
+            return li;
+        }
+
+        public List<dynamic> GetData1()
+        {
+            var li = pbl.ChiTietSanPhams.Select(p => new
+            {
+                p.IDChiTiet,
+                p.SanPham.PhanLoai,
+                p.SanPham.Ten,
+                p.HanSuDung,
+                p.SanPham.GiaBan,
+                p.SoLuong
+            }).ToList<dynamic>();
+            return li;
         }
         public DataTable GetData2(string query)
         {
@@ -22,67 +38,86 @@ namespace DataAccessLayer
         }
         public int Insert(ChiTietSanPham ctsp)
         {
-            return db.ExcuteData("insert into chitietsanpham(IDChiTiet,IDSanPham,IDNhaPhanPhoi,HanSuDung, SoLuong) values " +
-                "('" + ctsp.IDChiTiet + "','" + ctsp.IDSanPham + "','" + ctsp.IDNhaPhanPhoi + "','" + ctsp.HanSuDung + "',"+ctsp.SoLuong+")");
+            try
+            {
+                pbl.ChiTietSanPhams.Add(ctsp);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public int Delete(string id)
         {
-            return db.ExcuteData("delete from CHITIETSANPHAM where IDChiTiet ='" + id + "'");
+            try
+            {
+                var ct = pbl.ChiTietSanPhams.Where(p => p.IDChiTiet == id).FirstOrDefault();
+                pbl.ChiTietSanPhams.Remove(ct);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public int Update(string id, ChiTietSanPham ctsp)
         {
-            return db.ExcuteData("update chitietsanpham set IDNhaPhanPhoi = '" + ctsp.IDNhaPhanPhoi + "',HanSuDung = '" + ctsp.HanSuDung + "',SoLuong = "+ctsp.SoLuong+" where IDChiTiet = '" + id + "'");
+            try
+            {
+                var sp = pbl.ChiTietSanPhams.Where(p => p.IDChiTiet == ctsp.IDChiTiet).FirstOrDefault();
+                if (sp != null)
+                {
+                    sp.IDNhaPhanPhoi = ctsp.IDNhaPhanPhoi;
+                    sp.IDSanPham = ctsp.IDSanPham;
+                    sp.HanSuDung = ctsp.HanSuDung;
+                    sp.SoLuong = ctsp.SoLuong; 
+                    pbl.SaveChanges();
+                    return 1;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public ChiTietSanPham GetCTSP(string IDChiTiet)
         {
-            ChiTietSanPham ct = new ChiTietSanPham();
-            DataTable dt = db.GetData("select * from chitietsanpham where IDChiTiet ='" + IDChiTiet + "'");
-            ct.IDChiTiet = dt.Rows[0][0].ToString();
-            ct.IDSanPham = dt.Rows[0][1].ToString();
-            ct.IDNhaPhanPhoi = dt.Rows[0][2].ToString();
-            ct.HanSuDung = Convert.ToDateTime(dt.Rows[0][3].ToString());
-            return ct;
+            var ctsp = pbl.ChiTietSanPhams.Where(p => p.IDChiTiet == IDChiTiet).FirstOrDefault();   
+            return ctsp;
         }
         public int CountID(string f)
         {
-            return db.CountRows("select * from chitietsanpham where IDChiTiet LIKE '%CT"+f+"%'");
+            var count = pbl.ChiTietSanPhams.Count(p => p.IDChiTiet.Contains("CT" + f));
+            return count;
         }
 
-        public DataTable Search(string PhanLoai, string txt)
+        public List<dynamic> Search(string PhanLoai, string txt)
         {
+            var list = GetData1();
 
-            string query = string.Empty;
-
-            if (PhanLoai == "ID Chi Tiết")
+            if (!string.IsNullOrEmpty(txt))
             {
-                query = "SELECT " +
-                        "chitietsanpham.IDChiTiet AS 'ID Chi Tiết', " +
-                        "sanpham.Ten AS 'Tên Sản Phẩm', " +
-                        "sanpham.PhanLoai AS 'Phân Loại', " +
-                        "sanpham.GiaBan AS 'Giá Bán', " +
-                        "chitietsanpham.SoLuong AS 'Số Lượng', " +
-                        "chitietsanpham.HanSuDung AS 'Hạn Sử Dụng' " +
-                        "FROM CHITIETSANPHAM " +
-                        "JOIN SANPHAM ON CHITIETSANPHAM.IDSanPham = SANPHAM.IDSanPham " +
-                        "WHERE CHITIETSANPHAM.IDChiTiet LIKE '%" + txt + "%';";
-            }
-            else if (PhanLoai == "Tên Sản Phẩm")
-            {
-                query = "SELECT " +
-                        "chitietsanpham.IDChiTiet AS 'ID Chi Tiết', " +
-                        "sanpham.Ten AS 'Tên Sản Phẩm', " +
-                        "sanpham.PhanLoai AS 'Phân Loại', " +
-                        "sanpham.GiaBan AS 'Giá Bán', " +
-                        "chitietsanpham.SoLuong AS 'Số Lượng', " +
-                        "chitietsanpham.HanSuDung AS 'Hạn Sử Dụng' " +
-                        "FROM CHITIETSANPHAM " +
-                        "JOIN SANPHAM ON CHITIETSANPHAM.IDSanPham = SANPHAM.IDSanPham " +
-                        "WHERE SANPHAM.Ten LIKE '%" + txt + "%';";
+                switch (PhanLoai)
+                {
+                    case "ID Chi Tiết":
+                        list = list.Where(p => p.IDChiTiet.Contains(txt)).ToList();
+                        break;
+                    case "Tên Sản Phẩm":
+                        list = list.Where(p => p.TenSanPham.Contains(txt)).ToList();
+                        break;
+                    case "Phân Loại":
+                        list = list.Where(p => p.PhanLoai.Contains(txt)).ToList();
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            DataTable dt = GetData2(query);
-            return dt;
-
+            return list;
         }
 
 
