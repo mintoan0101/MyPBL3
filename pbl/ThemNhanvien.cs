@@ -209,7 +209,7 @@ namespace pbl
             txt_idnv.Text = idnv;
             txt_idtk.Text = row[1].ToString();
             txt_hovaten.Text = row[2].ToString();
-            dateTimePicker1.Value = SetStringToDate(row[3].ToString());
+            dateTimePicker1.Value = Convert.ToDateTime(row[3].ToString());
             if (row[4].ToString() =="True")
             {
                 rad_nam.Checked = true;
@@ -227,16 +227,16 @@ namespace pbl
             txt_tendangnhap.Text = row[12].ToString();
             txt_matkhau.Text = row[13].ToString();
         }
-       public DateTime SetStringToDate(string date)
-        {
-            string date2 = date.Substring(0, 10);
-            string[] parts = date2.Split('/');
-            int y = int.Parse(parts[2]);
-            int m = int.Parse(parts[1]);
-            int d = int.Parse(parts[0]);
-            return new DateTime(y, m, d);
+       //public DateTime SetStringToDate(string date)
+       // {
+       //     string date2 = date.Substring(0, 10);
+       //     string[] parts = date2.Split('/');
+       //     int y = int.Parse(parts[2]);
+       //     int m = int.Parse(parts[1]);
+       //     int d = int.Parse(parts[0]);
+       //     return new DateTime(y, m, d);
 
-        }
+       // }
         public void Luu_Nhan_Vien()
         {
             if(Kiem_Tra_Day_Du_Thong_Tin())
