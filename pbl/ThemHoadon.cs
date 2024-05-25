@@ -20,7 +20,6 @@ namespace pbl
         private KhachHang kh = new KhachHang(); 
 
         private ChiTietSanPhamBUS ctspBUS = new ChiTietSanPhamBUS();
-        private SanPhamBUS spBUS = new SanPhamBUS();
         private NhanVienBUS nvBUS = new NhanVienBUS();
         private bool DaDoiDiem = new bool();
         public ThemHoadon()
@@ -97,8 +96,8 @@ namespace pbl
                 hd.IDNhanVien = nvBUS.GetID(IDNhanVien);
                 hd.IDKhachHang = lb_IDKhachHang.Text.Substring(4);
                 hd.NgayTaoHoaDon = Convert.ToDateTime(lb_DateTime.Text);
-                hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
-                hd.TongTien = Convert.ToDouble(lb_Tong.Text);
+                hd.ChietKhau = Convert.ToDecimal(lb_GiamGia.Text);
+                hd.TongTien = Convert.ToDecimal(lb_Tong.Text);
                 List<ChiTietHoaDon> listChiTietHoaDon = new List<ChiTietHoaDon>();
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
@@ -111,6 +110,7 @@ namespace pbl
                             SoLuong = Convert.ToInt32(row.Cells["SoLuong"].Value)
                         };
                         ChiTietSanPham chiTietSanPham = chiTietHoaDon.ChiTietSanPham;
+                        chiTietSanPham.SoLuong -= chiTietHoaDon.SoLuong;
                         listChiTietHoaDon.Add(chiTietHoaDon);
                         ctspBUS.Update(chiTietSanPham);
                     }
@@ -124,7 +124,7 @@ namespace pbl
                 {
                     ChiTietHoaDonDAO.Instance.Insert(chitiethoadon);
                 }
-                int diem = Convert.ToInt32(Convert.ToDouble(lb_Tong.Text)/20);
+                int diem = Convert.ToInt32(Convert.ToDecimal(lb_Tong.Text)/20);
                 kh.Diem += diem;
                 KhachHangBUS.Instance.Update( kh);
                 MessageBox.Show("Thanh toán thành công");
@@ -160,37 +160,70 @@ namespace pbl
         {
             if (dataGridView1.CurrentCell != null)
             {
-                DataGridViewRow currentRow = dataGridView1.CurrentCell.OwningRow;
-                DataGridViewRow newRow = new DataGridViewRow();
-                newRow.CreateCells(dataGridView2);
-                newRow.Cells[0].Value = currentRow.Cells[0].Value;
-                newRow.Cells[1].Value = currentRow.Cells[3].Value;
-                newRow.Cells[2].Value = 1; 
-                newRow.Cells[3].Value = currentRow.Cells[4].Value;
-                if (int.TryParse(currentRow.Cells["SoLuong"].Value?.ToString(), out int soLuongCoSan))
+                DataGridViewRow currentRow = dataGridView1.Rows[e.RowIndex];
+
+                int SoLuongCoSan = Convert.ToInt32(currentRow.Cells["SoLuong"].Value);
+                if (SoLuongCoSan > 0)
                 {
-                    currentRow.Cells["SoLuong"].Value = soLuongCoSan - 1;
+                    currentRow.Cells["SoLuong"].Value = SoLuongCoSan - 1;
+
+                    bool isChecked = Convert.ToBoolean(currentRow.Cells["Check"].Value);
+                    if (!isChecked)
+                    {
+                        currentRow.Cells["Check"].Value = true;
+
+                        DataGridViewRow newRow = new DataGridViewRow();
+                        newRow.CreateCells(dataGridView2);
+                        newRow.Cells[0].Value = currentRow.Cells[0].Value;
+                        newRow.Cells[1].Value = currentRow.Cells[3].Value;
+                        newRow.Cells[2].Value = 1;
+                        newRow.Cells[3].Value = currentRow.Cells[4].Value;
+
+                        dataGridView2.Rows.Add(newRow);
+                    }
+                    else
+                    {
+                        string idChiTiet = currentRow.Cells["IDChiTiet"].Value.ToString();
+                        foreach (DataGridViewRow row in dataGridView2.Rows)
+                        {
+                            if (row.Cells[0].Value.ToString() == idChiTiet)
+                            {
+                                int SoLuong = Convert.ToInt32(row.Cells[2].Value);
+                                row.Cells[2].Value = SoLuong + 1;
+                                break;
+                            }
+                        }
+                    }
+
+                    double thanhtien = CalculateTotalPrice(dataGridView2);
+                    lb_ThanhTien.Text = thanhtien.ToString();
+                    double chietkhau = Convert.ToDouble(lb_GiamGia.Text);
+                    lb_Tong.Text = (thanhtien - chietkhau).ToString();
                 }
-                dataGridView2.Rows.Add(newRow);
-                double thanhtien = 0.0;
-                foreach (DataGridViewRow item in dataGridView2.Rows)
+                else
                 {
-                    thanhtien += Convert.ToDouble(item.Cells[2].Value) * Convert.ToDouble(item.Cells[3].Value);
-
+                    MessageBox.Show("Sản phẩm không đủ số lượng");
                 }
-                lb_ThanhTien.Text = thanhtien.ToString();
-                double chietkhau = Convert.ToDouble(lb_GiamGia.Text);
-                lb_Tong.Text = (thanhtien - chietkhau).ToString();
-
-
             }
         }
+
+        private double CalculateTotalPrice(DataGridView dataGridView)
+        {
+            double thanhtien = 0.0;
+            foreach (DataGridViewRow item in dataGridView.Rows)
+            {
+                thanhtien += Convert.ToDouble(item.Cells[2].Value) * Convert.ToDouble(item.Cells[3].Value);
+            }
+            return thanhtien;
+        }
+
 
         private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView2.CurrentCell != null &&
                 dataGridView2.CurrentCell.OwningColumn.Name == "SoLuong")
             {
+
                 DataGridViewRow currentRowInDataGridView2 = dataGridView2.CurrentCell.OwningRow;
                 if (double.TryParse(currentRowInDataGridView2.Cells["SoLuong"].Value?.ToString(), out double soLuongMoi))
                 {
@@ -238,8 +271,8 @@ namespace pbl
             {
                 HoaDon hd = new HoaDon();
                 hd.IDHoaDon = lb_ID.Text;
-                hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
-                hd.TongTien = Convert.ToDouble(lb_Tong.Text);
+                hd.ChietKhau = Convert.ToDecimal(lb_GiamGia.Text);
+                hd.TongTien = Convert.ToDecimal(lb_Tong.Text);
                 KhachHangBUS.Instance.DoiDiem(hd, kh);
                 lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
                 lb_GiamGia.Text = hd.ChietKhau.ToString();

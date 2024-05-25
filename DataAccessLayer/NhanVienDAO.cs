@@ -58,7 +58,6 @@ namespace DataAccessLayer
                 {
                     nhanVien.TenNhanVien = nv.TenNhanVien;
                     nhanVien.DiaChi = nv.DiaChi;
-                    nhanVien.ViTri = nv.ViTri;
                     nhanVien.CCCD = nv.CCCD;
                     nhanVien.Email = nv.Email;
                     nhanVien.MucLuong = nv.MucLuong;

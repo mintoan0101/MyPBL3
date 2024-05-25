@@ -35,7 +35,7 @@ namespace BusinessLogicLayer
         {
             return KhachHangDAO.Instance.GetDataBySDT(sdt);
         }
-        public List<KhachHang> GetData()
+        public List<dynamic> GetData()
         {
             return KhachHangDAO.Instance.GetData();
         }

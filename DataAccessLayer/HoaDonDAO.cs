@@ -30,15 +30,18 @@ namespace DataAccessLayer
         {
 
         }
-        public List<HoaDon> GetData()
+        public List<dynamic> GetData()
         {
-            var list = pbl.HoaDons.Select(p => p).ToList();
-            return list;
-        }
-
-        public DataTable GetData(string query)
-        {
-            return db.GetData(query);
+            var list = pbl.HoaDons.Select(p => new
+            {
+                p.IDHoaDon,
+                p.NgayTaoHoaDon,
+                p.IDNhanVien,
+                p.IDKhachHang,
+                p.ChietKhau,
+                p.TongTien
+            });
+            return list.ToList<dynamic>();
         }
 
         public int Insert(HoaDon hd)

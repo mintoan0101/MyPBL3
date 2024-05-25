@@ -28,7 +28,8 @@ namespace DataAccessLayer
                 p.SanPham.Ten,
                 p.HanSuDung,
                 p.SanPham.GiaBan,
-                p.SoLuong
+                p.SoLuong,
+                Check = false
             }).ToList<dynamic>();
             return li;
         }
