@@ -75,7 +75,7 @@ namespace DataAccessLayer
                         // Không thể sử dụng like trong LINQ to Entities với DateTime
                         break;
                     case "Nhân Viên":
-                        query = query.Where(hd => hd.NhanVien.IDTaiKhoan.Contains(txt) || hd.NhanVien.TenNhanVien.Contains(txt));
+                        query = query.Where(hd => hd.NhanVien.IDNhanVien.Contains(txt) || hd.NhanVien.TenNhanVien.Contains(txt));
                         break;
                     case "Khách Hàng":
                         query = query.Where(hd => hd.KhachHang.IDKhachHang.Contains(txt) || hd.KhachHang.Ten.Contains(txt));
@@ -90,16 +90,16 @@ namespace DataAccessLayer
                 switch (boloc)
                 {
                     case "< 100K":
-                        query = query.Where(hd => hd.TongTien < 100000);
+                        query = query.Where(hd => hd.TongTien < 100);
                         break;
                     case "100K - 500K":
-                        query = query.Where(hd => hd.TongTien >= 100000 && hd.TongTien <= 500000);
+                        query = query.Where(hd => hd.TongTien >= 100 && hd.TongTien <= 500);
                         break;
                     case "500K - 1000K":
-                        query = query.Where(hd => hd.TongTien >= 500000 && hd.TongTien <= 1000000);
+                        query = query.Where(hd => hd.TongTien >= 500 && hd.TongTien <= 1000);
                         break;
                     case "> 1000K":
-                        query = query.Where(hd => hd.TongTien > 1000000);
+                        query = query.Where(hd => hd.TongTien > 1000);
                         break;
                 }
             }

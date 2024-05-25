@@ -58,7 +58,7 @@ namespace BusinessLogicLayer
             int diemChietKhau = kh.Diem;
             if (diemChietKhau >= hd.TongTien / 2)
             {
-                int diemCanDung = Convert.ToInt32(hd.TongTien / 2000);
+                int diemCanDung = Convert.ToInt32(hd.TongTien / 2);
                 kh.Diem -= diemCanDung;
                 hd.ChietKhau = hd.TongTien / 2;
                 hd.TongTien -= hd.ChietKhau;

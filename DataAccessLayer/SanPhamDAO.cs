@@ -7,51 +7,129 @@ using System.Threading.Tasks;
 using System.Data;
 using MySql.Data.MySqlClient;
 using ValueObject;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace DataAccessLayer
 {
     public class SanPhamDAO
     {
         DBConnection db = new DBConnection();
-        public DataTable GetData()
+        PBL3Entities pbl = new PBL3Entities();
+        public List<SanPham> GetData()
         {
-            return db.GetData("select * from sanpham");
+            var li = pbl.SanPhams.ToList();
+            return li;
         }
         public DataTable GetData(string query)
         {
             return db.GetData(query);
         }
-        public DataTable GetDataByID(string id)
+        public List<SanPham> GetDataByID(string id)
         {
-            return db.GetData("select * from sanpham where IDSanPham = "+ id);
+            var li = pbl.SanPhams.Where(p => p.IDSanPham == id);
+            return li.ToList();
         }
-        public HashSet<string> GetSeparatedDataByColumn(string column)
+        public List<string> GetSeparatedDataByColumn()
         {
-            return db.GetSeperatedDataByColumn("sanpham",column);
+            var li = pbl.SanPhams.Select(p => p.PhanLoai).Distinct().ToList();
+            return li;
         }
         public int Insert(SanPham sp)
         {
-           return db.ExcuteData("insert into sanpham(IDSanPham,Ten,PhanLoai,GiaBan) values ('" + sp.IDSanPham + "','" + sp.Ten + "','" + sp.PhanLoai + "','" + sp.GiaBan + "')");
-        }
-        public int Delete(SanPham sp)
-        {
-            return db.ExcuteData("delete from sanpham where IDSanPham = "+sp.IDSanPham);
+            try
+            {
+                pbl.SanPhams.Add(sp);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public int Delete(string id)
         {
-            return db.ExcuteData("Delete from SANPHAM where IDSanPham = '"+id+"'");
+            try
+            {
+                var sp = pbl.SanPhams.Where(p => p.IDSanPham == id).FirstOrDefault();
+                pbl.SanPhams.Remove(sp);
+                pbl.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
         public int Update(SanPham sp)
         {
-            return db.ExcuteData("update sanpham set Ten = '"+sp.Ten+"', GiaBan = '"+sp.GiaBan+"' where IDSanPham = '"+sp.IDSanPham+"'");
+            try
+            {
+                var sanPham = pbl.SanPhams.Where(p => p.IDSanPham == sp.IDSanPham).FirstOrDefault();
+                if (sanPham != null)
+                {
+                    sanPham.Ten = sp.Ten;
+                    sanPham.PhanLoai = sp.PhanLoai;
+                    sanPham.GiaBan = sp.GiaBan;
+                    pbl.SaveChanges();
+                    return 1;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
-        public List<string> GetList(string column)
-        { 
-            return db.GetDataInColumn("sanpham", column); 
-        }
-        public string GetLastID(string query)
+        //public List<string> GetList(string column)
+        //{ 
+        //    return db.GetDataInColumn("sanpham", column); 
+        //}
+        public string GetLastID(string phanloai)
         {
-            return db.GetLastId(query);
+            var li = pbl.SanPhams.Where(p => p.PhanLoai == phanloai)
+                                 .OrderByDescending(p => p.IDSanPham)
+                                 .FirstOrDefault();
+            return li.IDSanPham;
         }
         
+        public List<SanPham> Search(string txt, string PhanLoai, string BoLoc)
+        {
+            var list = pbl.SanPhams.Select(p => p);
+            if (!string.IsNullOrEmpty(txt))
+            {
+                list = list.Where(p => p.Ten.Contains(txt));
+            }
+
+            if (PhanLoai != "Tất Cả")
+            {
+                list = list.Where(p => p.PhanLoai == PhanLoai);
+            }
+
+            if (BoLoc != "Tất cả")
+            {
+                switch(BoLoc)
+                {
+                    case "<30K":
+                        list = list.Where(p => p.GiaBan < 30000);
+                        break;
+                    case "30K - 100K":
+                        list = list.Where(p => p.GiaBan >= 30000 && p.GiaBan <= 100000);
+                        break;
+                    case "100K - 200K":
+                        list = list.Where(p => p.GiaBan >= 100000 && p.GiaBan <= 200000);
+                        break;
+                    case ">200K":
+                        list = list.Where(p => p.GiaBan > 200000);
+                        break;
+                    case "Giá giảm dần":
+                        list = list.OrderByDescending(p => p.GiaBan);
+                        break;
+                    case "Giá tăng dần":
+                        list = list.OrderBy(p => p.GiaBan);
+                        break;
+                }    
+            }
+            return list.ToList();
+        }
     }
 }

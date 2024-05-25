@@ -63,7 +63,7 @@ namespace DataAccessLayer
                 return 0;
             }
         }
-        public int Update(string id, ChiTietSanPham ctsp)
+        public int Update(ChiTietSanPham ctsp)
         {
             try
             {

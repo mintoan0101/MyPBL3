@@ -87,7 +87,11 @@ namespace pbl
         }
         private void btn_timkiem_Click(object sender, EventArgs e)
         {
-            Tim_Kiem();
+            string txt = txt_tentimkiem.Text;
+            string BoLoc = cb_boloc.SelectedItem.ToString();
+            string PhanLoai = cb_phanloai.SelectedItem.ToString();
+            dataGridView1.DataSource = sanphambus.Search(txt, BoLoc, PhanLoai);
+
         }
         private void btn_chitiet_Click(object sender, EventArgs e)
         {
@@ -107,11 +111,11 @@ namespace pbl
         //CÁC HÀM BỔ TRỢ
         public void Load_DS_San_Pham()
         {
-            dataGridView1.DataSource = sanphambus.GetData("select IDSanPham,Ten,PhanLoai,GiaBan from sanpham");
+            dataGridView1.DataSource = sanphambus.GetData();
         }
         public void Load_Phan_Loai()
         {
-            HashSet<string> ds_danhmuc = sanphambus.GetSeperatedDataByColumn("PhanLoai");
+            List<string> ds_danhmuc = sanphambus.GetSeperatedDataByColumn();
             cb_phanloai.Items.Add("Tất Cả");
             foreach (string s in ds_danhmuc)
             {
@@ -130,99 +134,5 @@ namespace pbl
             cb_boloc.Items.Add("Giá tăng dần");
             cb_boloc.SelectedItem = "Tất Cả";
         }
-        public string Loc_Tim_Kiem(string ten_sap_xep)
-        {
-            string st = "";
-            if (ten_sap_xep == "<30K")
-            {
-                st = " and GiaBan <= 30.00";
-            }
-            else if (ten_sap_xep == "30K - 100K")
-            {
-                st = " and GiaBan >= 30.00 AND GiaBan <=100.00";
-            }
-            else if (ten_sap_xep == "100K - 200K")
-            {
-                st = " and GiaBan >=100.00 AND GiaBan <=200.00";
-            }
-            else if (ten_sap_xep == ">200K")
-            {
-                st = " and GiaBan >=200.00";
-            }
-            else if (ten_sap_xep == "Giá tăng dần")
-            {
-                st = " ORDER BY GiaBan ASC";
-            }
-            else if (ten_sap_xep == "Giá giảm dần")
-            {
-                st = "ORDER BY GiaBan DESC";
-            }
-            return st;
-        }
-        public void Tim_Kiem()
-        {
-            string sql = "select IDSanPham,Ten,PhanLoai,GiaBan from sanpham ";
-            string ten_tim_kiem = txt_tentimkiem.Text;
-            string ten_bo_loc = cb_boloc.SelectedItem.ToString();
-            string ten_danh_muc = cb_phanloai.SelectedItem.ToString();
-            if (ten_bo_loc == "Tất Cả")
-            {
-                if(ten_tim_kiem == "")
-                {
-                    if(ten_danh_muc == "Tất Cả")
-                    {
-
-                    }
-                    else
-                    {
-                        sql += " and PhanLoai ='" + ten_danh_muc + "' ";
-                    }
-                }
-                else
-                {
-                    if(ten_danh_muc == "Tất Cả")
-                    {
-                        sql += " and Ten like '%" + ten_tim_kiem + "%' ";
-                    }
-                    else
-                    {
-                        sql += " and PhanLoai ='" + ten_danh_muc + "' and Ten like '%" + ten_tim_kiem + "%' ";
-                    }
-                }
-            }
-            else
-            {
-                if (ten_tim_kiem == "")
-                {
-                    if (ten_danh_muc == "Tất Cả")
-                    {
-                        //chỉ có bộ lọc
-                        sql += Loc_Tim_Kiem(ten_bo_loc);
-                    }
-                    else
-                    {
-                        //có bộ lọc,có phân loại
-                        sql += " and PhanLoai ='" + ten_danh_muc + "' "+Loc_Tim_Kiem(ten_bo_loc);
-                    }
-                }
-                else
-                {
-                    if (ten_danh_muc == "Tất Cả")
-                    {
-                        //có bộ lọc, có tìm kiếm
-                        sql += " and Ten like '%" + ten_tim_kiem + "%' "+ Loc_Tim_Kiem(ten_bo_loc);
-                    }
-                    else
-                    {
-                        //có bộ lọc, có tìm kiếm, có phan lọc 
-                        sql += " and PhanLoai ='" + ten_danh_muc + "' and Ten like '%" + ten_tim_kiem + "%' "+Loc_Tim_Kiem(ten_bo_loc);
-                    }
-                }
-            }
-             dataGridView1.DataSource = sanphambus.GetData(sql);
-            
-        }
-
-
     }
 }

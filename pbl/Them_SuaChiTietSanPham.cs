@@ -52,7 +52,7 @@ namespace pbl
             {
                 if (isEdit == true)
                 {
-                    if (bus.Update(IDChiTiet, GetCTSP()) == 1)
+                    if (bus.Update(GetCTSP()) == 1)
                     {
                         MessageBox.Show("Đã cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();

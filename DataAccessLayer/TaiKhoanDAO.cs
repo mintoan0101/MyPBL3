@@ -39,7 +39,7 @@ namespace DataAccessLayer
         }
         public string GetLastID()
         {
-            var anccount = db.TaiKhoans.OrderByDescending(p => p).FirstOrDefault();
+            var anccount = db.TaiKhoans.OrderByDescending(p => p.IDTaiKhoan).FirstOrDefault();
             if (anccount != null)
             {
                 return anccount.IDTaiKhoan;

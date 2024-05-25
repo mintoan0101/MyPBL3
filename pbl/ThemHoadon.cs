@@ -110,7 +110,9 @@ namespace pbl
                             IDChiTiet = row.Cells["IDChiTiet"].Value.ToString(),
                             SoLuong = Convert.ToInt32(row.Cells["SoLuong"].Value)
                         };
+                        ChiTietSanPham chiTietSanPham = chiTietHoaDon.ChiTietSanPham;
                         listChiTietHoaDon.Add(chiTietHoaDon);
+                        ctspBUS.Update(chiTietSanPham);
                     }
                         
 
@@ -122,8 +124,8 @@ namespace pbl
                 {
                     ChiTietHoaDonDAO.Instance.Insert(chitiethoadon);
                 }
-  //            int diem = Convert.ToInt32(lb_Tong.Text) / 20000;
- //             kh.Diem += diem;
+                int diem = Convert.ToInt32(Convert.ToDouble(lb_Tong.Text)/20);
+                kh.Diem += diem;
                 KhachHangBUS.Instance.Update( kh);
                 MessageBox.Show("Thanh toán thành công");
                 this.Close();
@@ -177,7 +179,7 @@ namespace pbl
 
                 }
                 lb_ThanhTien.Text = thanhtien.ToString();
-                double chietkhau = 0.0;
+                double chietkhau = Convert.ToDouble(lb_GiamGia.Text);
                 lb_Tong.Text = (thanhtien - chietkhau).ToString();
 
 
@@ -221,7 +223,7 @@ namespace pbl
 
                                 }
                                 lb_ThanhTien.Text = thanhtien.ToString();
-                                double chietkhau = 0.0;
+                                double chietkhau = Convert.ToDouble(lb_GiamGia.Text);
                                 lb_Tong.Text = (thanhtien - chietkhau).ToString();
                             }
                         }

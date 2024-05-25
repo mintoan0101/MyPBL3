@@ -12,7 +12,7 @@ namespace BusinessLogicLayer
     public class SanPhamBUS
     {
         SanPhamDAO dao = new SanPhamDAO();
-        public DataTable GetData()
+        public List<SanPham> GetData()
         {
             return dao.GetData();
         }
@@ -20,21 +20,17 @@ namespace BusinessLogicLayer
         {
             return dao.GetData(query);
         }
-        public DataTable GetDataByID(string id)
+        public List<SanPham> GetDataByID(string id)
         {
             return dao.GetDataByID(id);
         }
-        public HashSet<string> GetSeperatedDataByColumn(string comlumn)
+        public List<string> GetSeperatedDataByColumn()
         {
-            return dao.GetSeparatedDataByColumn(comlumn);
+            return dao.GetSeparatedDataByColumn();
         }
         public int Insert(SanPham sp )
         {
             return dao.Insert(sp);
-        }
-        public int Delete(SanPham sp)
-        {
-            return dao.Delete(sp);
         }
         public int Delete(string id)
         {
@@ -44,13 +40,17 @@ namespace BusinessLogicLayer
         {
             return dao.Update(sp);
         }
-        public List<string> GetList(string column)
+        //public List<string> GetList(string column)
+        //{
+        //    return dao.GetList(column);
+        //}
+        public string GetLastID(string PhanLoai)
         {
-            return dao.GetList(column);
+            return dao.GetLastID(PhanLoai);
         }
-        public string GetLastID(string phanloai)
+        public List<SanPham> Search(string txt, string PhanLoai, string BoLoc)
         {
-            return dao.GetLastID("select * from sanpham where PhanLoai = '"+phanloai+"'");
+            return dao.Search(txt, PhanLoai, BoLoc);
         }
     }
 }
