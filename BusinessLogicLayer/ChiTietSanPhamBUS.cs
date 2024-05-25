@@ -19,7 +19,7 @@ namespace BusinessLogicLayer
         {
             return dao.GetData(id);
         }
-        public List<dynamic> GetData1()
+        public List<ChiTietSanPham_View> GetData1()
         {
             return dao.GetData1();  
         }
@@ -67,9 +67,14 @@ namespace BusinessLogicLayer
             return result;
         }
 
-        public List<dynamic> Search(string PhanLoai, string txt)
+        public List<ChiTietSanPham_View> Search(string PhanLoai, string txt)
         {
             return dao.Search(PhanLoai, txt);
+        }
+
+        public List<SoLuongCTSP> GetSoLuongs() 
+        { 
+            return dao.GetSoLuongs();
         }
 
     }
