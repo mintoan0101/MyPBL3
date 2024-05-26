@@ -290,21 +290,21 @@ namespace pbl
 
         private void Refresh_DataGridView()
         {
-            dataGridView1.DataSource = null; // Xóa ràng buộc hiện có
-            dataGridView1.DataSource = list; // Ràng buộc lại với danh sách
+            
+            dataGridView1.Refresh();
             dataGridView2.Refresh();
         }
 
         private void TinhTien()
         {
-            double thanhtien = 0.0;
+            Decimal thanhtien = 0.000m;
             foreach (DataGridViewRow item in dataGridView2.Rows)
             {
-                thanhtien += Convert.ToDouble(item.Cells[2].Value) * Convert.ToDouble(item.Cells[3].Value);
+                thanhtien += Convert.ToDecimal(item.Cells[2].Value) * Convert.ToDecimal(item.Cells[3].Value);
 
             }
             lb_ThanhTien.Text = thanhtien.ToString();
-            double chietkhau = Convert.ToDouble(lb_GiamGia.Text);
+            Decimal chietkhau = Convert.ToDecimal(lb_GiamGia.Text);
             lb_Tong.Text = (thanhtien - chietkhau).ToString();
         }
 

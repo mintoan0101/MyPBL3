@@ -133,7 +133,7 @@
             this.lb_Tong.AutoSize = true;
             this.lb_Tong.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Tong.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lb_Tong.Location = new System.Drawing.Point(350, 498);
+            this.lb_Tong.Location = new System.Drawing.Point(297, 498);
             this.lb_Tong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Tong.Name = "lb_Tong";
             this.lb_Tong.Size = new System.Drawing.Size(19, 23);
@@ -146,7 +146,7 @@
             this.lb_GiamGia.AutoSize = true;
             this.lb_GiamGia.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_GiamGia.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lb_GiamGia.Location = new System.Drawing.Point(350, 458);
+            this.lb_GiamGia.Location = new System.Drawing.Point(297, 458);
             this.lb_GiamGia.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_GiamGia.Name = "lb_GiamGia";
             this.lb_GiamGia.Size = new System.Drawing.Size(19, 23);
@@ -159,7 +159,7 @@
             this.lb_ThanhTien.AutoSize = true;
             this.lb_ThanhTien.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_ThanhTien.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lb_ThanhTien.Location = new System.Drawing.Point(350, 419);
+            this.lb_ThanhTien.Location = new System.Drawing.Point(297, 419);
             this.lb_ThanhTien.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_ThanhTien.Name = "lb_ThanhTien";
             this.lb_ThanhTien.Size = new System.Drawing.Size(19, 23);

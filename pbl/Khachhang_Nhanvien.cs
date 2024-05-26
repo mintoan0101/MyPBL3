@@ -83,7 +83,16 @@ namespace pbl
         public void Load_Khach_Hang()
         {
             dataGridView1.DataSource = KhachHangBUS.Instance.GetData();
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            if (dataGridView1.Columns.Count > 0)
+            {
+                dataGridView1.Columns[0].Width = 90;
+                dataGridView1.Columns[1].Width = 200;
+                dataGridView1.Columns[2].Width = 100;
+                dataGridView1.Columns[3].Width = 70;
+            }
         }
+
         public void Load_Thuoc_Tinh()
         {
             cb_thuoctinh.Items.Add("SĐT");
