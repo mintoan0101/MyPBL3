@@ -12,7 +12,6 @@ namespace DataAccessLayer
 {
     public class KhachHangDAO
     {
-        DBConnection db = new DBConnection();
         PBL3Entities pbl = new PBL3Entities();  
         private static KhachHangDAO _Instance;
         public static KhachHangDAO Instance
@@ -31,10 +30,16 @@ namespace DataAccessLayer
         {
 
         }
-        public List<KhachHang> GetData()
+        public List<dynamic> GetData()
         {
-            var li = pbl.KhachHangs.Select(p => p);
-            return li.ToList();
+            var li = pbl.KhachHangs.Select(p => new
+            {
+                p.IDKhachHang,
+                p.Ten,
+                p.SDT,
+                p.Diem
+            });
+            return li.ToList<dynamic>();
         }
       
         public int Insert(KhachHang kh)

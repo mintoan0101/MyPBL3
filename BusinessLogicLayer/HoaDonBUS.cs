@@ -29,14 +29,9 @@ namespace BusinessLogicLayer
 
         }
 
-        public List<HoaDon> GetData()
+        public List<dynamic> GetData()
         {
             return HoaDonDAO.Instance.GetData();
-        }
-
-        public DataTable GetData(string query)
-        {
-            return HoaDonDAO.Instance.GetData(query);
         }
 
         public int Insert(HoaDon hd) 

@@ -20,16 +20,19 @@ namespace pbl
         private KhachHang kh = new KhachHang(); 
 
         private ChiTietSanPhamBUS ctspBUS = new ChiTietSanPhamBUS();
-        private SanPhamBUS spBUS = new SanPhamBUS();
         private NhanVienBUS nvBUS = new NhanVienBUS();
         private bool DaDoiDiem = new bool();
+        private List<ChiTietSanPham_View> list = new List<ChiTietSanPham_View>();
+        private List<SoLuongCTSP> list_sl = new List<SoLuongCTSP>();
+        
         public ThemHoadon()
         {
             InitializeComponent();
+            list_sl = ctspBUS.GetSoLuongs();
             Load_DS_San_Pham();
             SetBill();
             AddColumnsToDataGridView2();
-            panel10.Visible = false;
+            panel10.Visible = false; 
             panel11.Visible = false;
         }
         private void SetBill()
@@ -65,7 +68,9 @@ namespace pbl
 
         public void Load_DS_San_Pham()
         {
-            dataGridView1.DataSource = ctspBUS.GetData1();
+            list = ctspBUS.GetData1();
+            dataGridView1.DataSource = list;
+            
         }
 
         private void AddColumnsToDataGridView2()
@@ -97,8 +102,8 @@ namespace pbl
                 hd.IDNhanVien = nvBUS.GetID(IDNhanVien);
                 hd.IDKhachHang = lb_IDKhachHang.Text.Substring(4);
                 hd.NgayTaoHoaDon = Convert.ToDateTime(lb_DateTime.Text);
-                hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
-                hd.TongTien = Convert.ToDouble(lb_Tong.Text);
+                hd.ChietKhau = Convert.ToDecimal(lb_GiamGia.Text);
+                hd.TongTien = Convert.ToDecimal(lb_Tong.Text);
                 List<ChiTietHoaDon> listChiTietHoaDon = new List<ChiTietHoaDon>();
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
@@ -110,7 +115,8 @@ namespace pbl
                             IDChiTiet = row.Cells["IDChiTiet"].Value.ToString(),
                             SoLuong = Convert.ToInt32(row.Cells["SoLuong"].Value)
                         };
-                        ChiTietSanPham chiTietSanPham = chiTietHoaDon.ChiTietSanPham;
+                        ChiTietSanPham chiTietSanPham = ctspBUS.GetCTSP(chiTietHoaDon.IDChiTiet);
+                        chiTietSanPham.SoLuong -= chiTietHoaDon.SoLuong;
                         listChiTietHoaDon.Add(chiTietHoaDon);
                         ctspBUS.Update(chiTietSanPham);
                     }
@@ -124,7 +130,7 @@ namespace pbl
                 {
                     ChiTietHoaDonDAO.Instance.Insert(chitiethoadon);
                 }
-                int diem = Convert.ToInt32(Convert.ToDouble(lb_Tong.Text)/20);
+                int diem = Convert.ToInt32(Convert.ToDecimal(lb_Tong.Text)/20);
                 kh.Diem += diem;
                 KhachHangBUS.Instance.Update( kh);
                 MessageBox.Show("Thanh toán thành công");
@@ -156,81 +162,109 @@ namespace pbl
                 
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.CurrentCell != null)
+            // Kiểm tra xem cột thay đổi có phải là cột "Check" và chỉ thực hiện khi dữ liệu đã sẵn sàng
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Check" && e.RowIndex >= 0 && e.RowIndex < list.Count)
             {
-                DataGridViewRow currentRow = dataGridView1.CurrentCell.OwningRow;
-                DataGridViewRow newRow = new DataGridViewRow();
-                newRow.CreateCells(dataGridView2);
-                newRow.Cells[0].Value = currentRow.Cells[0].Value;
-                newRow.Cells[1].Value = currentRow.Cells[3].Value;
-                newRow.Cells[2].Value = 1; 
-                newRow.Cells[3].Value = currentRow.Cells[4].Value;
-                if (int.TryParse(currentRow.Cells["SoLuong"].Value?.ToString(), out int soLuongCoSan))
+                ChiTietSanPham_View selectedItem = list[e.RowIndex];
+                int SoLuongCoSan = selectedItem.SoLuong;
+
+                // Nếu cột "Check" được tick
+                if (Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells["Check"].Value))
                 {
-                    currentRow.Cells["SoLuong"].Value = soLuongCoSan - 1;
-                }
-                dataGridView2.Rows.Add(newRow);
-                double thanhtien = 0.0;
-                foreach (DataGridViewRow item in dataGridView2.Rows)
-                {
-                    thanhtien += Convert.ToDouble(item.Cells[2].Value) * Convert.ToDouble(item.Cells[3].Value);
-
-                }
-                lb_ThanhTien.Text = thanhtien.ToString();
-                double chietkhau = Convert.ToDouble(lb_GiamGia.Text);
-                lb_Tong.Text = (thanhtien - chietkhau).ToString();
-
-
-            }
-        }
-
-        private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridView2.CurrentCell != null &&
-                dataGridView2.CurrentCell.OwningColumn.Name == "SoLuong")
-            {
-                DataGridViewRow currentRowInDataGridView2 = dataGridView2.CurrentCell.OwningRow;
-                if (double.TryParse(currentRowInDataGridView2.Cells["SoLuong"].Value?.ToString(), out double soLuongMoi))
-                {
-                    string idChiTiet = currentRowInDataGridView2.Cells["IDChiTiet"].Value?.ToString();
-                    DataGridViewRow currentRowInDataGridView1 = null;
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    { 
-                        if (row.Cells["IDChiTiet"].Value?.ToString() == idChiTiet)
-                        {
-                        currentRowInDataGridView1 = row;
-                            break;
-                        } 
-                    }
-
-                    if (currentRowInDataGridView1 != null)
+                    if (SoLuongCoSan > 0)
                     {
-                        if (double.TryParse(currentRowInDataGridView1.Cells["SoLuong"].Value?.ToString(), out double soLuongCoSan))
-                        {
-                            if (soLuongMoi > soLuongCoSan)
-                            {
-                                MessageBox.Show("Số lượng trong kho không đủ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                currentRowInDataGridView2.Cells["SoLuong"].Value = soLuongCoSan;
-                            }
-                            else
-                            {
-                                double thanhtien = 0.0;
-                                foreach (DataGridViewRow item in dataGridView2.Rows)
-                                {
-                                    thanhtien += Convert.ToDouble(item.Cells[2].Value) * Convert.ToDouble(item.Cells[3].Value);
+                        selectedItem.SoLuong = SoLuongCoSan - 1;
+                        DataGridViewRow newRow = new DataGridViewRow();
+                        newRow.CreateCells(dataGridView2);
+                        newRow.Cells[0].Value = selectedItem.IDChiTiet;
+                        newRow.Cells[1].Value = selectedItem.Ten;
+                        newRow.Cells[2].Value = 1;
+                        newRow.Cells[3].Value = selectedItem.GiaBan;
 
-                                }
-                                lb_ThanhTien.Text = thanhtien.ToString();
-                                double chietkhau = Convert.ToDouble(lb_GiamGia.Text);
-                                lb_Tong.Text = (thanhtien - chietkhau).ToString();
-                            }
+                        dataGridView2.Rows.Add(newRow);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sản phẩm không đủ số lượng.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dataGridView1.Rows[e.RowIndex].Cells["Check"].Value = false; // Bỏ tick nếu số lượng bằng 0
+                    }
+                }
+                else // Nếu bỏ tick cột "Check"
+                {
+                    string idChiTiet = selectedItem.IDChiTiet;
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        if (row.Cells[0].Value.ToString() == idChiTiet)
+                        {
+                            int SoLuong = Convert.ToInt32(row.Cells[2].Value);
+                            selectedItem.SoLuong += SoLuong;
+                            dataGridView2.Rows.Remove(row);
+                            break;
                         }
                     }
                 }
+
+                // Cập nhật tổng tiền sau khi thay đổi số lượng hoặc trạng thái Check
+                TinhTien();
+                Refresh_DataGridView();
             }
         }
+
+        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.IsCurrentCellDirty)
+            {
+                dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+        private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView2.CurrentCell != null && dataGridView2.CurrentCell.OwningColumn.Name == "SoLuong")
+            {
+                DataGridViewRow currentRow = dataGridView2.CurrentCell.OwningRow;
+                try
+                {
+                    int soLuongMoi = Convert.ToInt32(currentRow.Cells["SoLuong"].Value);
+                    string idChiTiet = currentRow.Cells["IDChiTiet"].Value.ToString();
+                    int tongSoLuong = 0;
+                    foreach (SoLuongCTSP sl in list_sl)
+                    {
+                        if (sl.IDChiTiet == idChiTiet)
+                        {
+                            tongSoLuong = sl.SoLuong;
+                            break;
+                        }
+                    }
+                    foreach (ChiTietSanPham_View item in list)
+                    {
+                        if (item.IDChiTiet == idChiTiet)
+                        {
+                            if (tongSoLuong < soLuongMoi)
+                            {
+                                MessageBox.Show("Số lượng trong kho không đủ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                currentRow.Cells["SoLuong"].Value = tongSoLuong;
+                            }
+                            item.SoLuong = tongSoLuong - Convert.ToInt32(currentRow.Cells["SoLuong"].Value);
+                            TinhTien();
+                            Refresh_DataGridView();
+                            break;
+                        }
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Giá trị số lượng không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (InvalidCastException)
+                {
+                    MessageBox.Show("Giá trị số lượng không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
 
         private void bt_DoiDiem_Click(object sender, EventArgs e)
         {
@@ -238,8 +272,8 @@ namespace pbl
             {
                 HoaDon hd = new HoaDon();
                 hd.IDHoaDon = lb_ID.Text;
-                hd.ChietKhau = Convert.ToDouble(lb_GiamGia.Text);
-                hd.TongTien = Convert.ToDouble(lb_Tong.Text);
+                hd.ChietKhau = Convert.ToDecimal(lb_GiamGia.Text);
+                hd.TongTien = Convert.ToDecimal(lb_Tong.Text);
                 KhachHangBUS.Instance.DoiDiem(hd, kh);
                 lb_DiemThuong.Text = "Điểm Thưởng: " + kh.Diem.ToString();
                 lb_GiamGia.Text = hd.ChietKhau.ToString();
@@ -253,6 +287,28 @@ namespace pbl
         {
 
         }
+
+        private void Refresh_DataGridView()
+        {
+            dataGridView1.DataSource = null; // Xóa ràng buộc hiện có
+            dataGridView1.DataSource = list; // Ràng buộc lại với danh sách
+            dataGridView2.Refresh();
+        }
+
+        private void TinhTien()
+        {
+            double thanhtien = 0.0;
+            foreach (DataGridViewRow item in dataGridView2.Rows)
+            {
+                thanhtien += Convert.ToDouble(item.Cells[2].Value) * Convert.ToDouble(item.Cells[3].Value);
+
+            }
+            lb_ThanhTien.Text = thanhtien.ToString();
+            double chietkhau = Convert.ToDouble(lb_GiamGia.Text);
+            lb_Tong.Text = (thanhtien - chietkhau).ToString();
+        }
+
+        
     }
 }
 

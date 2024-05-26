@@ -25,7 +25,6 @@ namespace ValueObject
         public string TenNhanVien { get; set; }
         public System.DateTime NgaySinh { get; set; }
         public bool Nam { get; set; }
-        public string ViTri { get; set; }
         public string Email { get; set; }
         public string CCCD { get; set; }
         public string SoDienThoai { get; set; }

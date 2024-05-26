@@ -19,17 +19,18 @@ namespace DataAccessLayer
             return li;
         }
 
-        public List<dynamic> GetData1()
+        public List<ChiTietSanPham_View> GetData1()
         {
-            var li = pbl.ChiTietSanPhams.Select(p => new
+            var li = pbl.ChiTietSanPhams.Select(p => new ChiTietSanPham_View
             {
-                p.IDChiTiet,
-                p.SanPham.PhanLoai,
-                p.SanPham.Ten,
-                p.HanSuDung,
-                p.SanPham.GiaBan,
-                p.SoLuong
-            }).ToList<dynamic>();
+                IDChiTiet = p.IDChiTiet,
+                PhanLoai = p.SanPham.PhanLoai,
+                Ten = p.SanPham.Ten,
+                HanSuDung = p.HanSuDung,
+                GiaBan = p.SanPham.GiaBan,
+                SoLuong = p.SoLuong,
+                Check = false
+            }).ToList();
             return li;
         }
         public DataTable GetData2(string query)
@@ -95,7 +96,7 @@ namespace DataAccessLayer
             return count;
         }
 
-        public List<dynamic> Search(string PhanLoai, string txt)
+        public List<ChiTietSanPham_View> Search(string PhanLoai, string txt)
         {
             var list = GetData1();
 
@@ -107,7 +108,7 @@ namespace DataAccessLayer
                         list = list.Where(p => p.IDChiTiet.Contains(txt)).ToList();
                         break;
                     case "Tên Sản Phẩm":
-                        list = list.Where(p => p.TenSanPham.Contains(txt)).ToList();
+                        list = list.Where(p => p.Ten.Contains(txt)).ToList();
                         break;
                     case "Phân Loại":
                         list = list.Where(p => p.PhanLoai.Contains(txt)).ToList();
@@ -120,6 +121,15 @@ namespace DataAccessLayer
             return list;
         }
 
+        public List<SoLuongCTSP> GetSoLuongs()
+        {
+            var li = pbl.ChiTietSanPhams.Select(p => new SoLuongCTSP
+            {
+                IDChiTiet = p.IDChiTiet,
+                SoLuong = p.SoLuong,
+            });
+            return li.ToList();            
+        }
 
     }
 }

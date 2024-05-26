@@ -65,7 +65,7 @@ namespace pbl
                 {
                     IDHoaDon = row.Cells["IDHoaDon"].Value.ToString(),
                     NgayTaoHoaDon = DateTime.Parse(row.Cells["NgayTaoHoaDon"].Value.ToString()),
-                    TongTien = double.Parse(row.Cells["TongTien"].Value.ToString()),
+                    TongTien = decimal.Parse(row.Cells["TongTien"].Value.ToString()),
                     IDNhanVien = row.Cells["IDNhanVien"].Value.ToString(),
                     IDKhachHang = row.Cells["IDKhachHang"].Value.ToString()
                 };

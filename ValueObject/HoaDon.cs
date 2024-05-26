@@ -24,8 +24,8 @@ namespace ValueObject
         public string IDNhanVien { get; set; }
         public System.DateTime NgayTaoHoaDon { get; set; }
         public string IDKhachHang { get; set; }
-        public double ChietKhau { get; set; }
-        public double TongTien { get; set; }
+        public decimal ChietKhau { get; set; }
+        public decimal TongTien { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }

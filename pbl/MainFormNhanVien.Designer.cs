@@ -85,10 +85,10 @@
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button7.Location = new System.Drawing.Point(3, 474);
+            this.button7.Location = new System.Drawing.Point(3, 484);
             this.button7.Margin = new System.Windows.Forms.Padding(4);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(270, 66);
+            this.button7.Size = new System.Drawing.Size(270, 68);
             this.button7.TabIndex = 5;
             this.button7.Text = "    Doanh Thu";
             this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -101,10 +101,10 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button4.Location = new System.Drawing.Point(3, 401);
+            this.button4.Location = new System.Drawing.Point(3, 415);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(270, 66);
+            this.button4.Size = new System.Drawing.Size(270, 70);
             this.button4.TabIndex = 4;
             this.button4.Text = "    Đơn Hàng ";
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -133,10 +133,10 @@
             this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.button3.Image = global::pbl.Properties.Resources.khachhang;
-            this.button3.Location = new System.Drawing.Point(4, 327);
+            this.button3.Location = new System.Drawing.Point(4, 343);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(259, 66);
+            this.button3.Size = new System.Drawing.Size(259, 73);
             this.button3.TabIndex = 3;
             this.button3.Text = "   Khách hàng";
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -151,10 +151,10 @@
             this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.button2.Image = global::pbl.Properties.Resources.hoadon;
-            this.button2.Location = new System.Drawing.Point(3, 253);
+            this.button2.Location = new System.Drawing.Point(4, 277);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(259, 66);
+            this.button2.Size = new System.Drawing.Size(259, 67);
             this.button2.TabIndex = 2;
             this.button2.Text = "    Hoá đơn";
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -169,10 +169,10 @@
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.Image = global::pbl.Properties.Resources.sp;
-            this.button1.Location = new System.Drawing.Point(0, 179);
+            this.button1.Location = new System.Drawing.Point(0, 207);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(259, 66);
+            this.button1.Size = new System.Drawing.Size(259, 71);
             this.button1.TabIndex = 1;
             this.button1.Text = "    Sản phẩm";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -182,7 +182,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::pbl.Properties.Resources.logo2;
-            this.pictureBox1.Location = new System.Drawing.Point(19, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(19, 27);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(191, 156);

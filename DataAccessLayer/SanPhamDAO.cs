@@ -110,16 +110,16 @@ namespace DataAccessLayer
                 switch(BoLoc)
                 {
                     case "<30K":
-                        list = list.Where(p => p.GiaBan < 30000);
+                        list = list.Where(p => p.GiaBan < 30);
                         break;
                     case "30K - 100K":
-                        list = list.Where(p => p.GiaBan >= 30000 && p.GiaBan <= 100000);
+                        list = list.Where(p => p.GiaBan >= 30 && p.GiaBan <= 100);
                         break;
                     case "100K - 200K":
-                        list = list.Where(p => p.GiaBan >= 100000 && p.GiaBan <= 200000);
+                        list = list.Where(p => p.GiaBan >= 100 && p.GiaBan <= 200);
                         break;
                     case ">200K":
-                        list = list.Where(p => p.GiaBan > 200000);
+                        list = list.Where(p => p.GiaBan > 200);
                         break;
                     case "Giá giảm dần":
                         list = list.OrderByDescending(p => p.GiaBan);
